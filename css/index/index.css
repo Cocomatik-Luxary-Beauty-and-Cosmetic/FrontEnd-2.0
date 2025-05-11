@@ -75,6 +75,7 @@
     justify-content: center;
     align-items: center;
 
+
 }
 .special-type-menu-box{
     width: 30%;
@@ -104,6 +105,7 @@
     flex-wrap: wrap;
     gap: 30px;
     justify-content: center;
+    flex-wrap: wrap;
     padding: 10px;
 }
 
@@ -114,7 +116,6 @@
     border-radius: 20px;
     display: flex;
     overflow: hidden;
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
     transition: transform 0.3s ease-in-out;
 }
 #special-type-product-box:hover {
@@ -135,11 +136,12 @@ width: 70%;
     width: 60%;
     height: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: start;
-    padding: 30px 10px;
     flex-direction: column;
-    gap: 20px;
+    padding: 5px;
+    gap: 10px;
+   
     
 }
 #special-type-product-name{
