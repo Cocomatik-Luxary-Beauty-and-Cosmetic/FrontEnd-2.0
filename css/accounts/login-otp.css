@@ -1,0 +1,574 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+/* Main login-otp-page conttener  */
+#login-otp-page{
+width: 100%;
+height: 100vh;
+background-color:rgb(208, 208, 208);
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+gap: 5px;
+
+}
+/* <!-- Email login page --> */
+
+#EmailLoginBox{
+width: 70%;
+height: 70%;
+background-color: rgb(255, 255, 255);
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+border-radius: 20px;
+display: flex;
+/* justify-content: center; */
+align-items: center;
+overflow: hidden;
+/* display: none;  */
+
+}
+
+.add-box{
+    width: 40%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background: linear-gradient(135deg, #ffb6c1 0%, #ff758c 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+
+.email-box{
+    width: 60%;
+    height: 100%; 
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+
+}
+.back-icon-box{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 5%;
+    font-size: 30px;
+}
+.wrapper{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+        /* background-color: #ff9a9e; */
+  }
+  
+  #warnig {
+    margin: 10px;
+    font-size: small;
+    display: none;
+  }
+  
+ /* From Uiverse.io by akshat-patel28 */ 
+ #veryfy{
+  display: none;
+ }
+ #OtpVerfy{
+  display: none;
+ }
+/* .card {
+  width: 330px;
+  height: 80px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #269b24;
+  gap: 15px;
+} */
+.wave {
+  position: absolute;
+  transform: rotate(90deg);
+  left: -31px;
+  top: 32px;
+  width: 80px;
+  fill: #04e4003a;
+}
+.icon-container {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #04e40048;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+.icon {
+  width: 17px;
+  height: 17px;
+  color: #269b24;
+}
+.message-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+.message-text,
+.sub-text {
+  margin: 0;
+  cursor: default;
+}
+.message-text {
+  color: #269b24;
+  font-size: 17px;
+  font-weight: 700;
+}
+.sub-text {
+  font-size: 14px;
+  color: #555;
+}
+.cross-icon {
+  width: 18px;
+  height: 18px;
+  color: #555;
+  cursor: pointer;
+}
+
+
+  .term-privacy-box{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 10px;
+    font-size: 15px;
+    color: gray;
+  }
+   span{
+    color: rgb(58, 58, 255);
+  }
+ /* <!-- ---------------------OTP login page-------------------------- --> */
+#OtpLoginBox{
+width: 70%;
+height: 70%;
+background-color: rgb(255, 255, 255);
+border-radius: 20px;
+display: flex;
+align-items: center;
+overflow: hidden;
+display: none;
+background-position: center;
+background-size: contain;
+background-repeat: no-repeat;
+}
+
+.otp-box{
+    width: 60%;
+    height: 100%; 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.otp-input-box{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.emailid-show-box{
+  width: 100%;
+  font-size: 12px;
+  color: gray;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otp-enter-box{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px 20px;
+  }
+  
+ 
+  
+  .otp-inputs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+  
+  }
+  
+  .otp-inputs input {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    
+   
+  }
+
+
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  
+  #alertMsg{
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin: 5px;
+  }
+  .buttons {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;  
+  }
+  
+  button {
+    padding: 10px 60px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #backButton {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid gray;
+  }
+  
+  #verifyButton {
+    background-color:rgb(254, 134, 143);
+
+    color: white;
+  }
+
+  .timer-otp-box{
+    width: 100%;
+    height: 5%;
+    font-size: 12px;
+    color: gray;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+  }
+#resetOtpBtn{
+  color: black;
+  font-size: 15px;
+  display: none;
+}
+
+
+#OTPmsg{
+  color: red;
+}
+  
+
+/* new css both page */
+        .login-header{
+            width: 90%;
+        }
+        
+        .left-panel::before {
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="25" cy="25" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="75" cy="75" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="75" cy="25" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="25" cy="75" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.3)"/></svg>');
+            opacity: 0.6;
+        }
+        
+    .brand {
+    width: 100%;
+    height: 50%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+        }
+        
+        .brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .brand p {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        
+        .illustration {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            height: 50%;
+            width: 100%;
+        }
+        
+        .illustration-container {
+            background: white;
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .illustration-container::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(255, 182, 193, 0.2), transparent);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .product-icons {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100%;
+            padding-bottom: 40px;
+        }
+        
+        .product {
+            position: relative;
+            margin: 0 5px;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .product:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .product:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .product i {
+            font-size: 40px;
+            color: #ff758c;
+        }
+        
+        .product:nth-child(1) i {
+            color: #ff758c;
+        }
+        
+        .product:nth-child(2) i {
+            color: #ffd700;
+            font-size: 35px;
+        }
+        
+        .product:nth-child(3) i {
+            color: #9370db;
+        }
+        
+        .product::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+        }
+        
+        .right-panel {
+            width: 55%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header , .otp-header{
+            margin-bottom: 40px;
+        }
+        
+        .login-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .input-with-icon input:focus + i {
+            color: #ff758c;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .form-control:focus {
+            border-color: #ff758c;
+            box-shadow: 0 0 0 3px rgba(255, 117, 140, 0.2);
+            outline: none;
+            background-color: #fff;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+
+  

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/cosmetic/cosmetichome.css">
+    <title>Luxary Cosmetics</title>
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <!-- ------------------------------ADD ---------------------------------------------- -->
+    <section class="ad-container">
+        <div class="slider">
+            <img src="/assets/cosmetic/ads/ad1.jpg" alt="Ad 1">
+            <img src="/assets/cosmetic/ads/ad2.jpg" alt="Ad 2">
+            <img src="/assets/cosmetic/ads/ad3.jpg" alt="Ad 3">
+        </div>
+    </section>
+    <!--------------------------------product type ------------------------------------------------>
+
+    <section class="product-type-container">
+
+        <div class="product-type-box" id="Fragrances">
+            <div class="product-type"><img
+                    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGRvM3Z4MnhyM2hneWV1emMyanYxajdrZHFoaWJlczc4N3Q4bmI4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZybSuE93shkzkMaTc/giphy.gif"
+                    alt=""></div>
+            <div class="product-name">Fragrence </div>
+        </div>
+        <div class="product-type-box" id="Bodycare">
+            <div class="product-type"><img
+                    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGRvM3Z4MnhyM2hneWV1emMyanYxajdrZHFoaWJlczc4N3Q4bmI4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZybSuE93shkzkMaTc/giphy.gif"
+                    alt=""></div>
+            <div class="product-name">Body Care </div>
+        </div>
+        <div class="product-type-box" id="ColorCosmetics">
+            <div class="product-type"><img
+                    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGRvM3Z4MnhyM2hneWV1emMyanYxajdrZHFoaWJlczc4N3Q4bmI4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZybSuE93shkzkMaTc/giphy.gif"
+                    alt=""></div>
+            <div class="product-name">Color Cosmetics </div>
+        </div>
+        <div class="product-type-box" id="Skincare">
+            <div class="product-type"><img
+                    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGRvM3Z4MnhyM2hneWV1emMyanYxajdrZHFoaWJlczc4N3Q4bmI4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZybSuE93shkzkMaTc/giphy.gif"
+                    alt=""> </div>
+            <div class="product-name">Skin Care </div>
+        </div>
+        <div class="product-type-box" id="ImportedProducts">
+            <div class="product-type"><img
+                    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGRvM3Z4MnhyM2hneWV1emMyanYxajdrZHFoaWJlczc4N3Q4bmI4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZybSuE93shkzkMaTc/giphy.gif"
+                    alt=""></div>
+            <div class="product-name">Imported Products </div>
+        </div>
+        <div class="product-type-box" id="Haircare">
+            <div class="product-type"><img
+                    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGRvM3Z4MnhyM2hneWV1emMyanYxajdrZHFoaWJlczc4N3Q4bmI4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZybSuE93shkzkMaTc/giphy.gif"
+                    alt=""></div>
+            <div class="product-name">Hair Care </div>
+        </div>
+
+    </section>
+
+    <!-------------------------------- skin product type ------------------------------------------------>
+    <div class="section-title">Skin care </div>
+    <section class="products-box-container" id="products-container"></section>
+    <!-------------------------------- Fragrance type ------------------------------------------------>
+    <div class="section-title">Fragrance</div>
+    <section class="products-box-container" id="products-container2"></section>
+    <!-------------------------------- Color Cosmetics type ------------------------------------------------>
+    <div class="section-title">Color Cosmetics</div>
+    <section class="products-box-container" id="products-container3"></section>
+    <!-------------------------------- Hair Care type ------------------------------------------------>
+    <div class="section-title">Hair Care </div>
+    <section class="products-box-container" id="products-container4"></section>
+    <!-------------------------------- Body Care type ------------------------------------------------>
+    <div class="section-title">Body Care</div>
+    <section class="products-box-container" id="products-container5"></section>
+    <!-------------------------------- Imported Products type ------------------------------------------------>
+    <div class="section-title">Imported Products</div>
+    <section class="products-box-container" id="products-container6"></section>
+
+
+    <!-------------------------------- footer------------------------------------------------>
+
+    <div id="footer"></div>
+
+
+    <script src="/js/cosmetic/cosmeticProductApi.js"></script>
+    <script src="/js/cosmetic/cosmetichome.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Questrial", sans-serif;
+}
+
+:root {
+    --primary: #f6d5d5;
+    --secondary: #d4a5a5;
+    --accent: #b76e79;
+    --text: #4a4a4a;
+}
+.brand-type-container-title{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #500e18;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Questrial", sans-serif;
+}
+
+.brand-type-container{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items:start;
+    justify-content: space-around;
+    padding: 10px;
+
+}
+
+.brand-type-box{
+    width: 45%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+.brand-type-img{
+    width: 100%;
+    height: 90%;
+    border-radius: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+}
+.brand-type-name{
+    font-size: 25px;
+}
+#jewelryIMG{
+    background-image: url(/assets/index/jewelry-brand-img\ .jpg);
+}
+#CosmeticsIMG{
+    background-image: url(/assets/index/cosmetics-img.jpg);
+}
+
+.brand-type-box:hover {
+    transform: scale(1.07);
+}
+.special-type-menu-container{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.special-type-menu-box{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+/* special type product */
+
+.special-type-product-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+
+}
+#special-type-product-container-box{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 10px;
+}
+
+#special-type-product-box{
+    width: 350px;
+    height: 200px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    transition: transform 0.3s ease-in-out;
+}
+#special-type-product-box:hover {
+    transform: scale(1.07);
+}
+#special-type-product-img{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#special-type-product-img img{
+width: 70%;
+}
+#special-type-product-details{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding: 30px 10px;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+#special-type-product-name{
+    font-size: 20px;
+    font-weight: bold;
+}
+#special-type-product-about{
+    color: gray;
+}
+/* product-ADD */
+.add-container{
+    width: 100%;
+    height: 600px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+}
+
+.add-box-main{
+    width: 80%;
+    height: 80%;
+    background-color: var(--primary);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-container2{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px;
+
+}
+.add-box{
+    width:40%;
+    height: 300px;
+    border-radius: 20px;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
