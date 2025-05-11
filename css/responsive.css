@@ -22,7 +22,19 @@
 .product-type-box{width: 150px;}
 .product-name{ font-size: 15px;}
 .products-box-container{display: flex;align-items: center;justify-content: center;padding-left: 0px;gap: 10px;}
-#products-card{width: 200px;height: 300px;}
+#products-card{
+width: 200px;
+height: 320px;
+}
+#products-img{
+    height: 45%;
+}
+#products-dtls{
+    height: 55%;
+}
+#product-title {
+    font-size: 14px;
+}
 
 
 /* footer */
