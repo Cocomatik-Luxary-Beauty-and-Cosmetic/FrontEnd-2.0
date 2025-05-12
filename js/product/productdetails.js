@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const producttype = localStorage.getItem("producttype");
 
 
+
     console.log(producttype);
 
     if (!productDetails || !productDetails.sku) {

@@ -1,6 +1,7 @@
 const wislistBtn = document.getElementById("wislistBtn");
 const tokens = localStorage.getItem("authToken");
 const wishlistID =  JSON.parse(localStorage.getItem("productDetailsId"));
+const wishlistMsg = document.getElementById("productDetailMsg");
 
 console.log("Token:", tokens);
 console.log( wishlistID);
@@ -31,10 +32,13 @@ wislistBtn.addEventListener("click", function () {
     })
     .then(result => {
         console.log('Success:', result);
-        alert("ok");
+  wishlistMsg.innerHTML="Products added to Wishlist successfully"
+  setTimeout(function(){
+  window.location.href = "../account/wishlist.html";
+  },2000)
     })
     .catch(error => {
         console.error('Error:', error);
-        alert("not ok");
+  wishlistMsg.innerHTML="Failed to add products to the Wishlist. Please try again."
     });
 });
