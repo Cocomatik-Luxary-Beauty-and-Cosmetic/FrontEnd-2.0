@@ -1,8 +1,7 @@
 
-document.addEventListener("DOMContentLoaded", function () {
-    const token = '295941a3e0a429fb4a159dabfcee87d5c3496ffc'; // 🔐 Replace with your real token
+document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with your real token
     const apiUrl = 'https://engine.cocomatik.com/api/profile/';
-    // const token = localStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
 
     const form = document.querySelector('.profile-form');
 
