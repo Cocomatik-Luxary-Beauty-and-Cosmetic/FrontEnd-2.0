@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Address</title>
+    <link rel="stylesheet" href="/css/addresses/add-address.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="form-container">
+    <div class="form-header">
+        <h1>Add New Address</h1>
+        <p>Please fill in the details for your new delivery address</p>
+    </div>
+
+    <!-- Inside <form class="address-form"> -->
+    <form class="address-form" id="addressForm">
+        <!-- Address Type Selection -->
+        <div class="address-type-selection">
+            <h3>Address Type</h3>
+            <div class="type-options">
+                <label class="type-option">
+                    <input type="radio" name="address_type" value="home" checked>
+                    <div class="option-content">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="address_type" value="work">
+                    <div class="option-content">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Work</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="address_type" value="other">
+                    <div class="option-content">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Other</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_no">Phone Number</label>
+                <input type="tel" id="contact_no" name="contact_no" placeholder="Enter your phone number" required>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label for="house_no">Address Name (Optional)</label>
+            <input type="text" id="address_name" name="address_name" placeholder="Address Name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="house_no">House No :</label>
+            <input type="text" id="house_no" name="house_no" placeholder="House No.." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="street">Street Name :</label>
+            <input type="text" id="street" name="street" placeholder="Street, Road, etc." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="locality">Locality</label>
+            <input type="text" id="locality" name="locality" placeholder="Locality" required>
+        </div>
+
+        <div class="form-group">
+            <label for="district">District :</label>
+            <input type="text" id="district" name="district" placeholder="District" required>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="Enter your city" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="Enter your state" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" name="pincode" placeholder="Enter your pincode" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="Enter your country" value="India" required>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-save">Save Address</button>
+        </div>
+    </form>
+</div>
+<script src="/js/address/add-address.js"></script>
+</body>
+
+</html>

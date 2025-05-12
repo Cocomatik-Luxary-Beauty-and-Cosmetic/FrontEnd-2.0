@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with
                 // Default to "Other" if not male/female
                 document.querySelector(`input[name="gender"][value="other"]`).checked = true;
             }
+            let username =`${data.first_name} ${data.last_name}`;
+            let gender =data.gender
+            localStorage.setItem("username", username);
+            localStorage.setItem("gender", gender);
+
 
         })
         .catch(error => {
@@ -59,8 +64,9 @@ document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with
                 return res.json();
             })
             .then(data => {
-                alert('Profile updated successfully!');
                 console.log('Updated profile:', data);
+                localStorage.setItem("gender",data.gender)
+                location.reload();
             })
             .catch(error => {
                 console.error('Update error:', error);

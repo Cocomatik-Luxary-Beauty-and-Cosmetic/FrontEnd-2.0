@@ -15,48 +15,7 @@
     <!-- Main Content Container -->
     <div class="container">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <p class="greeting">Hello,</p>
-                <h3 class="username">VIVEK</h3>
-            </div>
-
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="orders.html">
-                        <i class="fas fa-box"></i>
-                        <span>My Orders</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="has-submenu">
-                        <i class="fas fa-cog"></i>
-                        <span>Account Settings</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                    <ul class="submenu open">
-                        <li><a href="profile.html" class="active">Profile Information</a></li>
-                        <li><a href="addresses.html">Manage Addresses</a></li>
-                        <li><a href="cards.html">Card Information</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="wishlist.html">
-                        <i class="fas fa-heart"></i>
-                        <span>My Wishlist</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="logout.html">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Log Out</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+         <div id="sidebar-container"></div>
 
         <!-- Main Content Area -->
         <main class="main-content">
@@ -113,10 +72,10 @@
             </form>
         </main>
     </div>
-    <!-- <div id="footer"></div> -->
 
     <script src="/js/accounts/profile.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/accounts/sidebar.js"></script>
 </body>
 
 </html>
