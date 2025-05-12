@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COCOMATIK - Profile Information</title>
+    <link rel="stylesheet" href="/css/accounts/profile.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- <div id="navbar"></div> -->
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p class="greeting">Hello,</p>
+                <h3 class="username">VIVEK</h3>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="orders.html">
+                        <i class="fas fa-box"></i>
+                        <span>My Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="has-submenu">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+                    <ul class="submenu open">
+                        <li><a href="profile.html" class="active">Profile Information</a></li>
+                        <li><a href="addresses.html">Manage Addresses</a></li>
+                        <li><a href="cards.html">Card Information</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="wishlist.html">
+                        <i class="fas fa-heart"></i>
+                        <span>My Wishlist</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <h1 class="page-title">Profile Information</h1>
+            <p class="page-subtitle">Manage your personal information</p>
+
+            <form class="profile-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" value="First Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" value="Last Name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" value="example@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" value="+91 9999999999">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="age">Age</label>
+                    <input type="number" class="form-control" id="age" value="00">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <div style="display: flex; gap: 20px;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="gender" value="male" checked style="margin-right: 8px;"> Male
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="gender" value="female" style="margin-right: 8px;"> Female
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="gender" value="other" style="margin-right: 8px;"> Other
+                        </label>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button type="submit" class="btn">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Cancel</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <!-- <div id="footer"></div> -->
+
+    <script src="/js/accounts/profile.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
