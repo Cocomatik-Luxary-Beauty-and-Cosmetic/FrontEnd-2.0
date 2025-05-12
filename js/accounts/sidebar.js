@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <i class="fas fa-user"></i>
         </div>
         <p class="greeting">Hello,</p>
-        <h3 class="username">VIVEK</h3>
+        <h3 class="username">User</h3>
     </div>
 
     <ul class="sidebar-menu">
@@ -41,9 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("sidebar-container").innerHTML = sidebarHTML;
 
     // Set username from localStorage
-    const username = localStorage.getItem("username") || "User";
-    document.querySelector(".username").textContent = username;
-
+    const username = localStorage.getItem("username");
+    if (username==="null null"){
+        document.querySelector(".username").textContent = User;
+    }
+    else
+        document.querySelector(".username").textContent = username;
+        
     // Set gender-based avatar
     const avatarDiv = document.querySelector('.user-avatar');
     const gender = localStorage.getItem("gender");
