@@ -10,7 +10,7 @@ body {
     color: #333;
 }
 
-.container {
+.profile-container {
     display: flex;
     max-width: 1200px;
     margin: 30px auto;
