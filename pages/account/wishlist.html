@@ -15,36 +15,35 @@
 
 <body>
     <div id="navbar"></div>
-    <section class="wishlist-container">
-
-        <!-------------------------------- Title------------------------------------------------>
-
-      <div class="container-heder">
-          <h4 class="wishlist-title">My Wishlist</h4>
-        <button class="clear-wishlist">Clear Wishlist</button>
-
-      </div>
-        <!-------------------------------- Wishlist Items------------------------------------------------>
-        <div class="wishlist-card-box" id="wishlistCartBox">
-
-
-<!-- 
-        <div class="wishlist-card" id=wishlistCard>
-            <img src="https://via.placeholder.com/150" alt="Product Image" class="product-image" />
-            <h4 class="product-name">Coconut Oil - Premium Cold Pressed</h4>
-            <p class="product-price">₹499</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div> -->
-
+   <!-- Wishlist Section -->
+ <div class="wishlist-container">
+          <div class="wishlist-header">
+            <h1 class="wishlist-title">My Wishlist</h1>
+            <!-- <div id="clearBtn"><i class="fas fa-trash-alt"></i>Clear All</div> -->
         </div>
+        
+        <div class="table-header">
+            <div></div>
+            <div>Product Name</div>
+            <div>Unit Price</div>
+            <div>Stock Status</div>
+            <div>Actions</div>
+        </div>
+<div id="wishlistCartBox">
 
-    </section>
+        
+      </div>    
+        <!-- Empty state (uncomment to show)
 
-
-
-
-
-    </section>
+        <div class="empty-wishlist">
+            <i class="far fa-heart empty-icon"></i>
+            <h2 class="empty-title">Your wishlist is empty</h2>
+            <p class="empty-text">Items added to your wishlist will be saved here.</p>
+            <button class="shop-btn">CONTINUE SHOPPING</button>
+        </div>
+        -->
+        
+</div>
 
 
 

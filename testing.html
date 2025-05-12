@@ -1,20 +1,25 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Questrial", sans-serif;
-}
-
-:root {
-    --primary: #f6d5d5;
-    --secondary: #d4a5a5;
-    --accent: #b76e79;
-    --text: #4a4a4a;
-}
-.wishlist-container {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             background-color: #fff;
@@ -39,21 +44,17 @@
             align-items: center;
             gap: 10px;
         }
-        #clearBtn{
-          padding: 5px 7px ;
-          border-radius: 5px;
-          background-color: var(--accent);
-          color: white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 5px;
-          font-size: 15px;
-
+        
+        .edit-icon {
+            color: #999;
+            cursor: pointer;
+            font-size: 16px;
         }
         
-   
-      
+        .edit-icon:hover {
+            color: #333;
+        }
+        
         .table-header {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
@@ -137,11 +138,22 @@
             color: #F44336;
         }
         
-       
+        .add-cart-btn {
+            background-color:#b76e79;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+        }
         
-     /* #addToCart:hover {
+        .add-cart-btn:hover {
             background-color: #555;
-        }  */
+        }
         
         .social-footer {
             padding: 20px 40px;
@@ -276,3 +288,57 @@
                 padding: 20px;
             }
         }
+    </style>
+</head>
+<body>
+    <div class="container">
+          <div class="wishlist-header">
+            <h1 class="wishlist-title">
+                My Wishlist
+                <span class="edit-icon">
+                    <i class="fas fa-pencil-alt"></i>
+                </span>
+            </h1>
+        </div>
+        
+        <div class="table-header">
+            <div></div>
+            <div>Product Name</div>
+            <div>Unit Price</div>
+            <div>Stock Status</div>
+            <div>Actions</div>
+        </div>
+<div id="wishlistCartBox">
+
+
+        <div class="wishlist-item">
+            <button class="remove-btn">×</button>
+
+            <div class="product-info">
+            <img src="/assets/product/hair2.png" alt="Product Split" class="product-image">
+            <div class="product-name">Product Split</div>
+            </div>
+
+            <div class="price-info">
+            <span class="current-price">€70.00</span>
+            </div>
+            <div class="stock-status">In Stock</div>
+            <div>
+             <button class="add-cart-btn">ADD TO CART</button>
+            </div>
+        </div>
+
+        
+      </div>    
+        <!-- Empty state (uncomment to show)
+
+        <div class="empty-wishlist">
+            <i class="far fa-heart empty-icon"></i>
+            <h2 class="empty-title">Your wishlist is empty</h2>
+            <p class="empty-text">Items added to your wishlist will be saved here.</p>
+            <button class="shop-btn">CONTINUE SHOPPING</button>
+        </div>
+        -->
+        
+</body>
+</html>
