@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const productDetails = JSON.parse(localStorage.getItem("productDetailsId"));
     const producttype = localStorage.getItem("producttype");
 
+
     console.log(producttype);
 
     if (!productDetails || !productDetails.sku) {
@@ -120,7 +121,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         const addcartId = productId;
         const quantity = 1;
 
-        console.log(addcartId, quantity);
 
         const token = localStorage.getItem("authToken");
 
@@ -161,3 +161,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
     });
 });
+
+
+
