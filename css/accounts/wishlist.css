@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Questrial", sans-serif;
+}
+
+:root {
+    --primary: #f6d5d5;
+    --secondary: #d4a5a5;
+    --accent: #b76e79;
+    --text: #4a4a4a;
+}
+
+.wishlist-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.wishlist-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 10px;
+  max-width: 260px;
+  margin: 10px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  font-family: sans-serif;
+  background-color: #fff;
+}
+
+.product-image {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.product-price {
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+
+
+
+
