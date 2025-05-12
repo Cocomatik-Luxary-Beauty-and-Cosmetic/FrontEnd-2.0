@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="/css/orders/order-details.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="page-title">Order Details</div>
+        
+        <div class="order-info-bar">
+            <div class="order-info-item">
+                <div class="info-label">Order Number</div>
+                <div class="info-value">1234567890</div>
+            </div>
+            <div class="order-info-item">
+                <div class="info-label">Order Date</div>
+                <div class="info-value">May 13, 2025</div>
+            </div>
+            <div class="order-info-item">
+                <div class="info-label">Payment Method</div>
+                <div class="info-value">Credit Card</div>
+            </div>
+            <div class="order-info-item">
+                <div class="info-label">Order Status</div>
+                <div class="status-badge">PENDING</div>
+            </div>
+        </div>
+        
+        <div class="grid-2">
+            <div class="panel">
+                <div class="panel-header">Shipping Address</div>
+                <div class="panel-body">
+                    <div class="address-box">
+                        <div class="address-name">John Doe</div>
+                        <div>123, Main Street</div>
+                        <div>Cityville, State</div>
+                        <div>123456</div>
+                        <div>Phone: 1234567890</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">Payment Information</div>
+                <div class="panel-body">
+                    <p><strong>Payment Method:</strong> Credit Card</p>
+                    <p><strong>Subtotal:</strong> $100.00</p>
+                    <p><strong>Shipping:</strong> $10.00</p>
+                    <p><strong>COD Charges:</strong> $5.00</p>
+                    <p><strong>Total:</strong> $115.00</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-header">Order Items</div>
+            <div class="panel-body">
+                <table class="product-list">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Image</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Image">
+                                <div class="product-image">Image</div>
+                            </td>
+                            <td data-label="Product">
+                                <div class="product-name">Example Product 1</div>
+                                <div class="product-sku">SKU: EXAMPLE-PROD-001</div>
+                            </td>
+                            <td data-label="Price">$20.00</td>
+                            <td data-label="Quantity">1</td>
+                            <td data-label="Total" style="text-align: right;">$20.00</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Image">
+                                <div class="product-image">Image</div>
+                            </td>
+                            <td data-label="Product">
+                                <div class="product-name">Example Product 2</div>
+                                <div class="product-sku">SKU: EXAMPLE-PROD-002</div>
+                            </td>
+                            <td data-label="Price">$30.00</td>
+                            <td data-label="Quantity">2</td>
+                            <td data-label="Total" style="text-align: right;">$60.00</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Image">
+                                <div class="product-image">Image</div>
+                            </td>
+                            <td data-label="Product">
+                                <div class="product-name">Example Product 3</div>
+                                <div class="product-sku">SKU: EXAMPLE-PROD-003</div>
+                            </td>
+                            <td data-label="Price">$20.00</td>
+                            <td data-label="Quantity">1</td>
+                            <td data-label="Total" style="text-align: right;">$20.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-header">Order Summary</div>
+            <div class="panel-body">
+                <table class="summary-table">
+                    <tr>
+                        <td class="summary-label">Subtotal</td>
+                        <td class="summary-value">$100.00</td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">Shipping Charges</td>
+                        <td class="summary-value">$10.00</td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">COD Charges</td>
+                        <td class="summary-value">$5.00</td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">Tax</td>
+                        <td class="summary-value">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">Discount</td>
+                        <td class="summary-value">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">Total</td>
+                        <td class="summary-value">$115.00</td>
+                    </tr>
+                </table>
+                
+                <div class="action-buttons">
+                    <a href="#" class="btn">Track Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <script src="/js/main.js"></script>
+   <script src="/js/orders/order-details.js"></script>
+</body>
+</html>

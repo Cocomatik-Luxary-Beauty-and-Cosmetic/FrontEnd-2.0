@@ -1,0 +1,132 @@
+const token = localStorage.getItem("authToken");
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('https://engine.cocomatik.com/api/orders/', {
+        method: 'GET',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })  // Replace with your actual API endpoint
+        .then(res => res.json())
+        .then(data => {
+            const orderList = document.querySelector('.order-list');
+            const pendingOrders = data.pending;
+            const processedOrders = data.processed;
+
+            // Helper to format currency
+            const formatCurrency = value => `₹${parseFloat(value).toFixed(2)}`;
+
+            // Helper to render items
+            function renderItems(items) {
+                return items.map(item => `
+                    <div class="order-item">
+                        <div class="item-image">
+                            <img src="https://res.cloudinary.com/cocomatik/image/upload/v1744724253/${item.product_details.display_image}" alt="${item.product_details.name}" />
+                        </div>
+                        <div class="item-details">
+                            <h4 class="item-name">${item.product_details.name}</h4>
+                            <p class="item-price">${formatCurrency(item.product_details.price)}</p>
+                            <p class="item-quantity">Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Pending Orders
+            if (pendingOrders.length > 0) {
+                const pendingTitle = document.createElement('p');
+                pendingTitle.className = 'page-subtitle';
+                pendingTitle.textContent = 'Pending Orders';
+                orderList.appendChild(pendingTitle);
+
+                pendingOrders.forEach(order => {
+                    const orderCard = document.createElement('div');
+                    orderCard.className = 'order-card';
+                    orderCard.innerHTML = `
+                        <div class="order-header">
+                            <div>
+                                <span class="order-id">Order #${order.order_number}</span>
+                                <span class="order-date">Placed on ${new Date(order.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <span class="order-status status-pending">Pending</span>
+                        </div>
+                        <div class="order-items">
+                            ${renderItems(order.cart_items)}
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">Total: ${formatCurrency(order.total_price)}</div>
+                            <div class="order-actions">
+                                <button class="btn btn-sm" onclick="cancelOrder(${order.id})">Cancel</button>
+                            </div>
+                        </div>
+                    `;
+                    orderList.appendChild(orderCard);
+                });
+            }
+
+            // Render Processed Orders
+            if (processedOrders.length > 0) {
+                const processedTitle = document.createElement('p');
+                processedTitle.className = 'page-subtitle';
+                processedTitle.textContent = 'Orders Approved';
+                orderList.appendChild(processedTitle);
+
+                processedOrders.forEach(order => {
+                    const orderCard = document.createElement('div');
+                    orderCard.className = 'order-card';
+                    orderCard.innerHTML = `
+                        <div class="order-header">
+                            <div>
+                                <span class="order-id">Order #${order.order_number}</span>
+                                <span class="order-date">Placed on ${new Date(order.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <span class="order-status status-delivered">Processing</span>
+                        </div>
+                        <div class="order-items">
+                            ${renderItems(order.items)}
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">Total: ${formatCurrency(order.total_price)}</div>
+                            <div class="order-actions">
+                                <button class="btn btn-secondary btn-sm order-details-btn" id="orders_detail">Order Details</button>
+                            </div>
+                        </div>
+                    `;
+                    orderList.appendChild(orderCard);
+                    orderCard.querySelector(".order-details-btn").addEventListener("click", function (e) {
+                        window.location.href = `order-details.html?order_number=${order.order_number}`;
+                    });
+                });
+            }
+
+            // If no orders
+            if (pendingOrders.length === 0 && processedOrders.length === 0) {
+                document.querySelector('.empty-orders').style.display = 'block';
+            }
+        })
+        .catch(err => {
+            console.error('Error fetching orders:', err);
+            document.querySelector('.empty-orders').style.display = 'block';
+        });
+});
+
+// Cancel function placeholder
+function cancelOrder(orderId) {
+    if (confirm('Are you sure you want to cancel this order?')) {
+        // Replace with your actual cancel endpoint
+        fetch(`/api/orders/${orderId}/cancel/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => res.json())
+            .then(data => {
+                alert('Order cancelled successfully!');
+                location.reload();
+            })
+            .catch(err => {
+                console.error('Cancel failed:', err);
+                alert('Failed to cancel order.');
+            });
+    }
+}

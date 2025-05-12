@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 <div id="products-dtls">
                     <h3 id="product-title">${product.title}</h3>
                     <p id="product-category">${product.category}</p>
-                    <p id="product-price">$${product.price}</p>
+                    <p id="product-price"> ₹${product.price}</p>
                     <button id="add-to-cart">Add to Cart</button>
                 </div>
             `;
