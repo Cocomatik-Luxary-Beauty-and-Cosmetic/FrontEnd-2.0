@@ -41,7 +41,7 @@ function renderWishlistCards(items) {
 
     const card = document.createElement("div");
     card.className = "wishlist-item";
-    card.id = "wishlistCard";
+    card.id = `wishlistCard-${index}`; // Make sure ID is unique
     card.innerHTML = `
       <button class="remove-btn" id="removeWishlist-${index}">×</button>
       <div class="product-info">
@@ -53,14 +53,23 @@ function renderWishlistCards(items) {
       </div>
       <div class="stock-status">In Stock</div>
       <div>
-      <button class="add-cart-btn" id="addToCart">ADD TO CART</button>
+        <button class="add-cart-btn" id="addToCart-${index}">ADD TO CART</button>
       </div>
     `;
     wishlistCartBox.appendChild(card);
 
+    // Remove button event
     const removeBtn = document.getElementById(`removeWishlist-${index}`);
     removeBtn.addEventListener("click", () => {
       removeWishlistItem(sku);
+    });
+
+    // ADD TO CART button event
+    const addToCartBtn = document.getElementById(`addToCart-${index}`);
+    addToCartBtn.addEventListener("click", () => {
+      localStorage.setItem("productDetailsId", JSON.stringify({ sku: sku }));
+      localStorage.setItem("producttype", sku.split("-")[0]);
+      window.location.href = "/pages/product/productdetails.html";
     });
   });
 }
