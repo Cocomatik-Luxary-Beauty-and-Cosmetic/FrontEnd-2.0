@@ -128,15 +128,16 @@
             color: #333;
         }
         
-        .stock-status {
-            color: #4CAF50;
-            font-weight: 500;
-        }
-        
-        .out-of-stock {
-            color: #F44336;
-        }
-        
+     .stock-status.in-stock {
+  color: green;
+  font-weight: bold;
+}
+
+.stock-status.out-of-stock {
+  color: red;
+  font-weight: bold;
+}
+
        
         
      /* #addToCart:hover {

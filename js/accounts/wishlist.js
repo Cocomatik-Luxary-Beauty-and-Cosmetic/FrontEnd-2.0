@@ -38,6 +38,10 @@ function renderWishlistCards(items) {
     const productName = details.name || 'Product Name';
     const productPrice = details.price || '0';
     const sku = details.sku; // Get SKU
+    const stock = details.stock;
+
+    const stockStatus = stock > 1 ? "In Stock" : "Out of Stock";
+    const stockClass = stockStatus === "Out of Stock" ? "out-of-stock" : "in-stock";
 
     const card = document.createElement("div");
     card.className = "wishlist-item";
@@ -51,7 +55,7 @@ function renderWishlistCards(items) {
       <div class="price-info">
         <span class="current-price">₹${productPrice}</span>
       </div>
-      <div class="stock-status">In Stock</div>
+      <div class="stock-status ${stockClass}">${stockStatus}</div>
       <div>
         <button class="add-cart-btn" id="addToCart-${index}">ADD TO CART</button>
       </div>
