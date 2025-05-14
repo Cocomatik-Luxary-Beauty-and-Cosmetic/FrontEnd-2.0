@@ -13,7 +13,8 @@ async function fetchAndRenderOrder() {
     }
 
     try {
-        const response = await fetch('https://engine.cocomatik.com/api/orders/', {
+        const
+         response = await fetch('https://engine.cocomatik.com/api/orders/', {
             method: 'GET',
             headers: {
                 'Authorization': `token ${token}`,
@@ -40,14 +41,13 @@ async function fetchAndRenderOrder() {
             document.querySelector('.status-badge').textContent = order.status;
 
             // Shipping Address
-            const addr = order.address;
             const addressBox = document.querySelector('.address-box');
             addressBox.innerHTML = `
-                <div class="address-name">${addr.name}</div>
-                <div>${addr.house_no}, ${addr.street}</div>
-                <div>${addr.city}, ${addr.locality}</div>
-                <div>${addr.district}, ${addr.state}, ${addr.pincode}</div>
-                <div>Phone: ${addr.contact_no}</div>
+                <div class="address-name">${order.rcv_name}</div>
+                <div>${order.rcv_house_no}, ${order.rcv_street}</div>
+                <div>${order.rcv_city}, ${order.rcv_locality}</div>
+                <div>${order.rcv_district}, ${order.rcv_state}, ${order.rcv_pincode}</div>
+                <div>Phone: ${order.rcv_contact_no}</div>
             `;
 
             // Payment Info
