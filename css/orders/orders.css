@@ -245,6 +245,10 @@ body {
 .order-total {
     font-weight: 600;
 }
+.address-ot {
+    font-weight: 400;
+    font-size: 13px;
+}
 
 .order-actions {
     display: flex;
@@ -276,6 +280,18 @@ body {
 .empty-orders p {
     color: #888;
     margin-bottom: 20px;
+}
+
+.empty-orders a:hover {
+    color: #e08080;
+}
+
+.empty-orders a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+    text-decoration: none;
 }
 
 /* Responsive */

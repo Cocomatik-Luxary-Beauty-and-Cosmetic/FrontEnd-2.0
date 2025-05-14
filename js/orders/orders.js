@@ -59,6 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
                             ${renderItems(order.cart_items)}
                         </div>
                         <div class="order-footer">
+
+                            <div class="address-ot">
+                                Address: ${order.rcv_name} ${order.rcv_address_name} ${order.rcv_house_no}, ${order.rcv_street}, ${order.rcv_locality}, ${order.rcv_city}, ${order.rcv_district}, ${order.rcv_state} - ${order.rcv_pincode} <br>
+                                Contact: ${order.rcv_contact_no}
+                            </div>
+
+                        </div>
+                        </div>
+                        <div class="order-footer">
                             <div class="order-total">Total: ${formatCurrency(order.total_price)}</div>
                             <div class="order-actions">
                                 <button class="btn btn-sm" onclick="cancelOrder(${order.id})">Cancel</button>
@@ -89,6 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                         <div class="order-items">
                             ${renderItems(order.items)}
+                        </div>
+                        <div class="order-footer">
+                        <div class="address-ot">
+                                Address: ${order.rcv_name} ${order.rcv_address_name} ${order.rcv_house_no}, ${order.rcv_street}, ${order.rcv_locality}, ${order.rcv_city}, ${order.rcv_district}, ${order.rcv_state} - ${order.rcv_pincode} <br>
+                                Contact: ${order.rcv_contact_no} 
+                            </div>
                         </div>
                         <div class="order-footer">
                             <div class="order-total">Total: ${formatCurrency(order.total_price)}</div>
