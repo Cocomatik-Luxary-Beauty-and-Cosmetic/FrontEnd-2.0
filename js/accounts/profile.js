@@ -1,7 +1,13 @@
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = 'login.html';
+    }
+
 
 document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with your real token
     const apiUrl = 'https://engine.cocomatik.com/api/profile/';
-    const token = localStorage.getItem('authToken')
+    
 
     const form = document.querySelector('.profile-form');
 
@@ -24,13 +30,10 @@ document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with
             if (data.gender === "male" || data.gender === "female") {
                 document.querySelector(`input[name="gender"][value="${data.gender}"]`).checked = true;
             } else {
-                // Default to "Other" if not male/female
                 document.querySelector(`input[name="gender"][value="other"]`).checked = true;
             }
-            let username =`${data.first_name} ${data.last_name}`;
-            let gender =data.gender
-            localStorage.setItem("username", username);
-            localStorage.setItem("gender", gender);
+            localStorage.setItem("username", `${data.first_name} ${data.last_name}`);
+            localStorage.setItem("gender", data.gender);
 
 
         })
@@ -74,3 +77,8 @@ document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with
             });
     });
 });
+
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = 'login.html'; // Fallback redirect in case of major errors
+}

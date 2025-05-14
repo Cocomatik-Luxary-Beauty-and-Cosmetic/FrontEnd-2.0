@@ -1,3 +1,8 @@
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = 'login.html';
+    }
 async function fetchAndRenderOrder() {
     const urlParams = new URLSearchParams(window.location.search);
     const orderNumber = urlParams.get('order_number');
@@ -11,7 +16,7 @@ async function fetchAndRenderOrder() {
         const response = await fetch('https://engine.cocomatik.com/api/orders/', {
             method: 'GET',
             headers: {
-                'Authorization': `token 295941a3e0a429fb4a159dabfcee87d5c3496ffc`,
+                'Authorization': `token ${token}`,
                 'Content-Type': 'application/json'
             }
         });
@@ -64,7 +69,7 @@ async function fetchAndRenderOrder() {
                     <tr>
                         <td data-label="Image">
                             <div class="product-image">
-                                <img src="${pd.display_image}" alt="${pd.name}" style="width:60px;">
+                                <img src="https://res.cloudinary.com/cocomatik/image/upload/v1744724253/${pd.display_image}" alt="${pd.name}" style="width:60px;">
                             </div>
                         </td>
                         <td data-label="Product">
@@ -98,3 +103,9 @@ async function fetchAndRenderOrder() {
 }
 
 fetchAndRenderOrder();
+
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = 'login.html'; // Fallback redirect in case of major errors
+}
+

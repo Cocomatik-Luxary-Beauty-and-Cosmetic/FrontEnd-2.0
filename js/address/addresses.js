@@ -1,4 +1,8 @@
-const token = localStorage.getItem("authToken");
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 
 
 document.addEventListener("DOMContentLoaded", function () { // 🔐 Use your actual token
@@ -143,3 +147,8 @@ function removeAddress(id, button) {
             alert("Error deleting address");
         });
 }
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = '/pages/account/login.html'; // Fallback redirect in case of major errors
+}
+
