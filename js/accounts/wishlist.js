@@ -1,6 +1,10 @@
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 // Get auth token from localStorage
-const token = localStorage.getItem("authToken");
-console.log("Auth Token:", token);
+// console.log("Auth Token:", token);
 
 // Load wishlist on page load
 loadWishlist();
@@ -98,3 +102,8 @@ function removeWishlistItem(sku) {
     console.error("Error removing wishlist item:", error);
   });
 }
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = 'login.html'; // Fallback redirect in case of major errors
+}
+

@@ -1,4 +1,8 @@
-const token= localStorage.getItem("authToken")
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 
 document.querySelectorAll('.type-option input[type="radio"]').forEach((input) => {
     input.addEventListener('change', () => {
@@ -70,3 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 });
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = '/pages/account/login.html'; // Fallback redirect in case of major errors
+}

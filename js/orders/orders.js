@@ -1,4 +1,8 @@
-const token = localStorage.getItem("authToken");
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch('https://engine.cocomatik.com/api/orders/', {
@@ -130,3 +134,9 @@ function cancelOrder(orderId) {
             });
     }
 }
+
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = 'login.html'; // Fallback redirect in case of major errors
+}
+

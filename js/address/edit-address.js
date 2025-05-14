@@ -1,7 +1,12 @@
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const addressId = urlParams.get('address_id');
-    const token = localStorage.getItem("authToken");
+    
 
     if (!addressId) {
         console.error("No address_id found in URL");
@@ -100,3 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 });
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = '/pages/account/login.html'; // Fallback redirect in case of major errors
+}
