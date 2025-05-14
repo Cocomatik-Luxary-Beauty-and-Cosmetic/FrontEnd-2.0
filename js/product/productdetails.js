@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 setTimeout(function () {
                     productDetailMsg.innerHTML = ""
-                    window.location.href = ("cart.html")
+                    window.location.href = ("/pages/cart/cart.html")
                 }, 1400)
             })
             .catch(error => {
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 setTimeout(function () {
                     productDetailMsg.innerHTML = ""
-                    window.location.href = ("cart.html")
+                    window.location.href = ("/pages/cart/cart.html")
                 }, 1400)
             })
             .catch(error => {

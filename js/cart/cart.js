@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("authToken");
     const cartEndpoint = "https://engine.cocomatik.com/api/orders/cart/";
@@ -15,150 +14,166 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Format currency (₹)
     function formatCurrency(amount) {
         return `₹${amount.toFixed(2)}`;
     }
 
-    fetch(cartEndpoint, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `token ${token}`
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+    function loadCart() {
+        fetch(cartEndpoint, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `token ${token}`
             }
-            return response.json();
         })
-        .then(data => {
-            const items = data.items;
-            console.log("Cart data:", data);
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                const items = data.items;
+                console.log("Cart data:", data);
 
-            if (!items || items.length === 0) {
-                cartContainer.innerHTML = "";
-                cartSummary.style.display = "none";
-                cartTitle.textContent = "Your Shopping Cart";
-                emptyCart.style.display = "block";
-            } else {
-                emptyCart.style.display = "none";
-                cartSummary.style.display = "block";
-                cartTitle.textContent = `Your Shopping Cart (${data.total_items} items)`;
-                cartContainer.innerHTML = "";
+                if (!items || items.length === 0) {
+                    cartContainer.innerHTML = "";
+                    cartSummary.style.display = "none";
+                    cartTitle.textContent = "Your Shopping Cart";
+                    emptyCart.style.display = "block";
+                } else {
+                    emptyCart.style.display = "none";
+                    cartSummary.style.display = "block";
+                    cartTitle.textContent = `Your Shopping Cart (${data.total_items} items)`;
+                    cartContainer.innerHTML = "";
 
-                items.forEach(item => {
-                    const product = item.product_details;
-                    const itemHTML = `
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
-                        </div>
-                        <div class="item-details">
-                            <h3 class="item-name">${product.name}</h3>
-                            <p class="item-price">${formatCurrency(product.price)}</p>
-                            <div class="item-actions">
-                                <div class="quantity-selector">
-                                    <button class="quantity-btn">-</button>
-                                    <input type="text" class="quantity-input" value="${item.quantity}">
-                                    <button class="quantity-btn">+</button>
-                                </div>
-                                <button class="remove-btn">
-                                    <i class="fas fa-trash-alt"></i> Remove
-                                </button>
-                                <button class="save-for-later">
-                                    <i class="fas fa-heart"></i> Save for later
-                                </button>
-                            </div>
-                        </div>
+                    let totalMRP = 0;
+                    let totalActual = 0;
+
+                    items.forEach(item => {
+                        const product = item.product_details;
+                        const quantity = item.quantity;
+
+                        const mrp = product.mrp * quantity;
+                        const price = product.price * quantity;
+
+                        totalMRP += mrp;
+                        totalActual += price;
+
+                        const itemHTML = `
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
+            </div>
+            <div class="item-details">
+                <h3 class="item-name">${product.name}</h3>
+                <p class="item-price">
+                    <del>₹${product.mrp.toFixed(2)}</del> 
+                    <strong>₹${product.price.toFixed(2)}</strong>
+                </p>
+                <div class="item-actions">
+                    <div class="quantity-selector" data-cart-id="${item.id}">
+                        <button class="quantity-btn decrement">-</button>
+                        <input type="text" class="quantity-input" value="${item.quantity}">
+                        <button class="quantity-btn increment">+</button>
                     </div>
-                `;
-                    cartContainer.insertAdjacentHTML("beforeend", itemHTML);
-                });
+                    <button class="remove-btn" data-cart-id="${item.id}">
+                        <i class="fas fa-trash-alt"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+                        cartContainer.insertAdjacentHTML("beforeend", itemHTML);
+                    });
 
-                // Summary calculations
-                const subtotal = data.total_value;
-                const tax = subtotal * 0.1; // 10% tax (example)
-                const total = subtotal + tax;
+                    // Update summary values
+                    document.querySelector(".summary-subtotal").textContent = formatCurrency(totalMRP);
+                    document.querySelector(".summary-total-amount").textContent = formatCurrency(totalActual);
+                    document.querySelectorAll(".summary-tax")[1].textContent = formatCurrency(totalMRP - totalActual); // Assuming 2nd .summary-tax is 'Total in Product Discount'
 
-                summarySubtotal.textContent = formatCurrency(subtotal);
-                summaryTotal.textContent = formatCurrency(total);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching cart data:", error);
+                cartContainer.innerHTML = "<p>Failed to load cart items. Please try again.</p>";
+            });
+    }
+
+    // Initial load
+    loadCart();
+
+    // Event Delegation for increment/decrement/remove
+    document.body.addEventListener("click", function (e) {
+        if (e.target.classList.contains("increment") || e.target.classList.contains("decrement")) {
+            const selector = e.target.closest(".quantity-selector");
+            const input = selector.querySelector(".quantity-input");
+            const cartItemId = selector.dataset.cartId;
+            let quantity = parseInt(input.value);
+
+            if (e.target.classList.contains("increment")) {
+                quantity += 1;
+            } else if (e.target.classList.contains("decrement") && quantity > 1) {
+                quantity -= 1;
             }
+
+            input.value = quantity;
+            updateCartItemQuantity(cartItemId, quantity);
+        }
+
+        if (e.target.closest(".remove-btn")) {
+            const cartItemId = e.target.closest(".remove-btn").dataset.cartId;
+            deleteCartItem(cartItemId);
+        }
+    });
+
+    function updateCartItemQuantity(cartItemId, newQuantity) {
+        fetch("https://engine.cocomatik.com/api/orders/cart/update/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `token ${token}`,
+            },
+            body: JSON.stringify({
+                cart_item_id: cartItemId,
+                quantity: newQuantity,
+            }),
         })
-        .catch(error => {
-            console.error("Error fetching cart data:", error);
-            cartContainer.innerHTML = "<p>Failed to load cart items. Please try again.</p>";
-        });
-});
-
-
-function updateCartItemQuantity(cartItemId, newQuantity) {
-    const token = localStorage.getItem("authToken");
-
-    if (!token) return alert("You're not logged in!");
-
-    fetch("https://engine.cocomatik.com/api/orders/cart/update/", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Token ${token}`,
-        },
-        body: JSON.stringify({
-            cart_item_id: cartItemId,
-            quantity: newQuantity,
-        }),
-    })
-        .then(res => {
-            if (!res.ok) throw new Error("Failed to update quantity.");
-            return res.json();
-        })
-        .then(data => {
-            console.log("Quantity updated:", data);
-            loadCart(); // Refresh the cart UI
-        })
-        .catch(err => console.error("Update error:", err));
-}
-
-function deleteCartItem(cartItemId) {
-    const token = localStorage.getItem("authToken");
-
-    if (!token) return alert("You're not logged in!");
-
-    fetch("https://engine.cocomatik.com/api/orders/cart/delete/", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Token ${token}`,
-        },
-        body: JSON.stringify({
-            cart_item_id: cartItemId,
-        }),
-    })
-        .then(res => {
-            if (!res.ok) throw new Error("Failed to delete cart item.");
-            return res.json(); // Django might return empty body with 204
-        })
-        .then(data => {
-            console.log("Item deleted:", data);
-            loadCart(); // Refresh the cart UI
-        })
-        .catch(err => console.error("Delete error:", err));
-}
-minusBtn.addEventListener("click", () => {
-    const currentQty = parseInt(quantityInput.value);
-    if (currentQty > 1) {
-        updateCartItemQuantity(cartItem.id, currentQty - 1);
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to update quantity.");
+                return res.json();
+            })
+            .then(data => {
+                console.log("Quantity updated:", data);
+                loadCart();
+            })
+            .catch(err => console.error("Update error:", err));
     }
-});
 
-plusBtn.addEventListener("click", () => {
-    const currentQty = parseInt(quantityInput.value);
-    updateCartItemQuantity(cartItem.id, currentQty + 1);
-});
+    function deleteCartItem(cartItemId) {
+        const token = localStorage.getItem("authToken");
 
-removeBtn.addEventListener("click", () => {
-    if (confirm("Remove this item from cart?")) {
-        deleteCartItem(cartItem.id);
+        if (!token) return alert("You're not logged in!");
+
+        fetch("https://engine.cocomatik.com/api/orders/cart/delete/", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `token ${token}`,
+            },
+            body: JSON.stringify({
+                cart_item_id: cartItemId,
+            }),
+        })
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to delete cart item.");
+                // Don't try to parse if it's 204 No Content
+                if (res.status === 204) return {};
+                return res.json();
+            })
+            .then(data => {
+                console.log("Item deleted:", data);
+                loadCart(); // Refresh the cart UI
+            })
+            .catch(err => console.error("Delete error:", err));
     }
+
 });
