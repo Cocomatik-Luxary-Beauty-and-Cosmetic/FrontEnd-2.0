@@ -1,3 +1,8 @@
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("authToken");
     const cartEndpoint = "https://engine.cocomatik.com/api/orders/cart/";
@@ -61,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         console.log(totalActual)
 
                         const itemHTML = `
+<<<<<<< HEAD
                             <div class="cart-item">
                                 <div class="item-image">
                                     <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
@@ -84,6 +90,33 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                             </div>
                         `;
+=======
+        <div class="cart-item">
+            <div class="item-image">
+            <a href="/pages/product/productdetails.html?product_id=${product.id}">
+                <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
+            </a>
+        </div>
+            <div class="item-details">
+                <h3 class="item-name">${product.name}</h3>
+                <p class="item-price">
+                    <del>₹${product.mrp.toFixed(2)}</del> 
+                    <strong>₹${product.price.toFixed(2)}</strong>
+                </p>
+                <div class="item-actions">
+                    <div class="quantity-selector" data-cart-id="${item.id}">
+                        <button class="quantity-btn decrement">-</button>
+                        <input type="text" class="quantity-input" value="${item.quantity}">
+                        <button class="quantity-btn increment">+</button>
+                    </div>
+                    <button class="remove-btn" data-cart-id="${item.id}">
+                        <i class="fas fa-trash-alt"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+>>>>>>> fe2e4cffd1ab1915aa0bee135567f219a6552c68
                         cartContainer.insertAdjacentHTML("beforeend", itemHTML);
                     });
 
@@ -180,3 +213,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = '/pages/account/login.html'; // Fallback redirect in case of major errors
+}
