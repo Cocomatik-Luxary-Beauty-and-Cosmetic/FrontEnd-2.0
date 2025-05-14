@@ -108,6 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem('authToken', data.token);
                 OtpVerfy.style.display = "flex";
 
+                // Fetch profile details after login
+                fetchUserProfile(data.token);
+
                 setTimeout(() => {
                     window.location.href = "/index.html";
                     verifyButton.style.backgroundColor = "";
@@ -119,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     verifyButton.style.backgroundColor = "";
                     otpMsg.textContent = '';
                 }, 3000);
-            
             }
         } catch (error) {
             console.error('Error:', error);
@@ -128,7 +130,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 verifyButton.style.backgroundColor = "";
                 otpMsg.textContent = '';
             }, 3000);
-        
         }
     });
+
+    // Function to fetch user profile after login
+    function fetchUserProfile(token) {
+        const apiUrl = 'https://engine.cocomatik.com/api/profile/';
+
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Profile data:", data);
+            localStorage.setItem("username", `${data.first_name} ${data.last_name}`);
+            localStorage.setItem("gender", data.gender);
+        })
+        .catch(error => {
+            console.error("Failed to fetch profile:", error);
+        });
+    }
 });

@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Beauty & Gems - Login</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .login-container {
+            width: 900px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .left-panel {
+            width: 45%;
+            background: linear-gradient(135deg, #ffb6c1 0%, #ff758c 100%);
+            padding: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+        }
+        
+        .left-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="25" cy="25" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="75" cy="75" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="75" cy="25" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="25" cy="75" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.3)"/></svg>');
+            opacity: 0.6;
+        }
+        
+        .brand {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .brand p {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        
+        .illustration {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .illustration-container {
+            background: white;
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .illustration-container::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(255, 182, 193, 0.2), transparent);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .product-icons {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100%;
+            padding-bottom: 40px;
+        }
+        
+        .product {
+            position: relative;
+            margin: 0 5px;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .product:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .product:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .product i {
+            font-size: 40px;
+            color: #ff758c;
+        }
+        
+        .product:nth-child(1) i {
+            color: #ff758c;
+        }
+        
+        .product:nth-child(2) i {
+            color: #ffd700;
+            font-size: 35px;
+        }
+        
+        .product:nth-child(3) i {
+            color: #9370db;
+        }
+        
+        .product::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+        }
+        
+        .right-panel {
+            width: 55%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            margin-bottom: 40px;
+        }
+        
+        .login-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .input-with-icon input:focus + i {
+            color: #ff758c;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .form-control:focus {
+            border-color: #ff758c;
+            box-shadow: 0 0 0 3px rgba(255, 117, 140, 0.2);
+            outline: none;
+            background-color: #fff;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #ccc;
+            font-size: 12px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-btn i {
+            font-size: 18px;
+        }
+        
+        .social-btn.google i {
+            color: #DB4437;
+        }
+        
+        .social-btn.facebook i {
+            color: #4267B2;
+        }
+        
+        .social-btn.apple i {
+            color: #000;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #aaa;
+        }
+        
+        .footer a {
+            color: #ff758c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #333;
+        }
+        
+        @media (max-width: 900px) {
+            .login-container {
+                width: 95%;
+                height: auto;
+                flex-direction: column;
+            }
+            
+            .left-panel, .right-panel {
+                width: 100%;
+                padding: 30px;
+            }
+            
+            .left-panel {
+                padding-bottom: 50px;
+            }
+            
+            .illustration-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .product i {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <button class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="left-panel">
+            <div class="brand">
+                <h1>Luxe Beauty</h1>
+                <p>Experience luxury beauty and jewelry products with just one click away.</p>
+            </div>
+            
+            <div class="illustration">
+                <div class="illustration-container">
+                    <div class="product-icons">
+                        <div class="product">
+                            <i class="fas fa-pump-soap"></i>
+                        </div>
+                        <div class="product">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="product">
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Please enter your email to continue</p>
+            </div>
+            
+            <form action="otp.html">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <input type="email" id="email" class="form-control" placeholder="your.email@example.com" required>
+                        <i class="far fa-envelope"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Send Verification Code</button>
+            </form>
+            
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn google">
+                    <i class="fab fa-google"></i>
+                </button>
+                <button class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="social-btn apple">
+                    <i class="fab fa-apple"></i>
+                </button>
+            </div>
+            
+            <div class="footer">
+                By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
