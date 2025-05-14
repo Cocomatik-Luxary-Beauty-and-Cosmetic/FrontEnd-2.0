@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return items.map(item => `
                     <div class="order-item">
                         <div class="item-image">
-                            <img src="https://res.cloudinary.com/cocomatik/image/upload/v1744724253/${item.product_details.display_image}" alt="${item.product_details.name}" />
+                            <img src="https://res.cloudinary.com/cocomatik/${item.product_details.display_image}" alt="${item.product_details.name}" />
                         </div>
                         <div class="item-details">
                             <h4 class="item-name">${item.product_details.name}</h4>
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function cancelOrder(orderId) {
     if (confirm('Are you sure you want to cancel this order?')) {
         // Replace with your actual cancel endpoint
-        fetch(`/api/orders/${orderId}/cancel/`, {
+        fetch(`https://engine.cocomatik.com/api/orders/cancel/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         })

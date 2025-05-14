@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,125 +9,45 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Main Content -->
     <div class="container">
         <h1 class="page-title">Your Shopping Cart (3 items)</h1>
-        
         <div class="cart-container">
-            <!-- Cart Items -->
-            <div class="cart-items">
-                <!-- Item 1 -->
-                <div class="cart-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/100" alt="Coconut Oil">
-                    </div>
-                    <div class="item-details">
-                        <h3 class="item-name">Coconut Oil - Premium Cold Pressed</h3>
-                        <p class="item-price">₹499</p>
-                        <div class="item-actions">
-                            <div class="quantity-selector">
-                                <button class="quantity-btn">-</button>
-                                <input type="text" class="quantity-input" value="1">
-                                <button class="quantity-btn">+</button>
-                            </div>
-                            <button class="remove-btn">
-                                <i class="fas fa-trash-alt"></i> Remove
-                            </button>
-                            <button class="save-for-later">
-                                <i class="fas fa-heart"></i> Save for later
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Item 2 -->
-                <div class="cart-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/100" alt="Coconut Scrub">
-                    </div>
-                    <div class="item-details">
-                        <h3 class="item-name">Coconut Scrub - Exfoliating</h3>
-                        <p class="item-price">₹349</p>
-                        <div class="item-actions">
-                            <div class="quantity-selector">
-                                <button class="quantity-btn">-</button>
-                                <input type="text" class="quantity-input" value="2">
-                                <button class="quantity-btn">+</button>
-                            </div>
-                            <button class="remove-btn">
-                                <i class="fas fa-trash-alt"></i> Remove
-                            </button>
-                            <button class="save-for-later">
-                                <i class="fas fa-heart"></i> Save for later
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Item 3 -->
-                <div class="cart-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/100" alt="Coconut Milk Shampoo">
-                    </div>
-                    <div class="item-details">
-                        <h3 class="item-name">Coconut Milk Shampoo</h3>
-                        <p class="item-price">₹399</p>
-                        <div class="item-actions">
-                            <div class="quantity-selector">
-                                <button class="quantity-btn">-</button>
-                                <input type="text" class="quantity-input" value="1">
-                                <button class="quantity-btn">+</button>
-                            </div>
-                            <button class="remove-btn">
-                                <i class="fas fa-trash-alt"></i> Remove
-                            </button>
-                            <button class="save-for-later">
-                                <i class="fas fa-heart"></i> Save for later
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Cart Summary -->
+            <div class="cart-items"></div>
             <div class="cart-summary">
                 <h2 class="summary-title">Order Summary</h2>
-                
+
                 <div class="summary-row">
-                    <span class="summary-label">Subtotal (3 items)</span>
-                    <span class="summary-value">₹1,596</span>
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value summary-subtotal">₹0</span>
                 </div>
-                
-                <div class="summary-row">
-                    <span class="summary-label">Shipping</span>
-                    <span class="summary-value">₹0</span>
-                </div>
-                
+
                 <div class="summary-row">
                     <span class="summary-label">Tax</span>
-                    <span class="summary-value">₹159</span>
+                    <span class="summary-value summary-tax">₹0</span>
                 </div>
-                
 
-                
                 <div class="summary-row summary-total">
                     <span class="summary-label">Total</span>
-                    <span class="summary-value">₹1,755</span>
+                    <span class="summary-value summary-total-amount">₹0</span>
                 </div>
-                
+
                 <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
                 <a href="#" class="continue-shopping">Continue Shopping</a>
             </div>
+
+            <!-- Empty Cart State (hidden by default) -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your Cart is Empty</h3>
+                <p>Looks like you haven't added any items to your cart yet.</p>
+                <a href="#" class="btn">Start Shopping</a>
+            </div>
         </div>
-        
-        <!-- Empty Cart State (hidden by default) -->
-        <div class="empty-cart">
-            <i class="fas fa-shopping-cart"></i>
-            <h3>Your Cart is Empty</h3>
-            <p>Looks like you haven't added any items to your cart yet.</p>
-            <a href="#" class="btn">Start Shopping</a>
-        </div>
-    </div>
+
+        <script src="/js/cart/cart.js"></script>
 </body>
+
 </html>
