@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="order-footer">
                             <div class="order-total">Total: ${formatCurrency(order.total_price)}</div>
                             <div class="order-actions">
-                                <button class="btn btn-sm" onclick="cancelOrder(${order.id})">Cancel</button>
+                                <button class="btn btn-sm" onclick="cancelOrder(${order.order_number}, '${order.created_at}')">Cancel</button>
                             </div>
                         </div>
                     `;
@@ -130,26 +130,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
-// Cancel function placeholder
-function cancelOrder(orderId) {
+function cancelOrder(orderNumber, createdAt) {
+    const orderTime = new Date(createdAt);
+    const now = new Date();
+    const diffInMinutes = (now - orderTime) / (1000 * 60);
+
+    if (diffInMinutes > 120) {  // Changed from 1 minute to 2 hours for valid cancellations
+        alert("This order can no longer be cancelled (over 2 hours old).");
+        return;
+    }
+
     if (confirm('Are you sure you want to cancel this order?')) {
-        // Replace with your actual cancel endpoint
         fetch(`https://engine.cocomatik.com/api/orders/cancel/`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `token ${token}`
+            },
+            body: JSON.stringify({ order_number: orderNumber })  // Pass order_number
         })
-            .then(res => res.json())
-            .then(data => {
-                alert('Order cancelled successfully!');
+        .then(res => res.json())
+        .then(data => {
                 location.reload();
-            })
-            .catch(err => {
-                console.error('Cancel failed:', err);
-                alert('Failed to cancel order.');
-            });
+        })
+        .catch(err => {
+            console.error('Cancel failed:', err);
+            alert('Failed to cancel order.');
+        });
     }
 }
-
 } catch (error) {
     console.error('Critical error:', error);
     window.location.href = 'login.html'; // Fallback redirect in case of major errors
