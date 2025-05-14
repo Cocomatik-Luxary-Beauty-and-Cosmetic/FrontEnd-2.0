@@ -13,7 +13,7 @@
 <body>
     <!-- Main Content -->
     <div class="container">
-        <h1 class="page-title">Your Shopping Cart (3 items)</h1>
+        <h1 class="page-title"></h1>
         <div class="cart-container">
             <div class="cart-items"></div>
             <div class="cart-summary">
@@ -25,10 +25,16 @@
                 </div>
 
                 <div class="summary-row">
+                    <span class="summary-label">Shipping Charges</span>
+                    <span class="summary-value summary-shipping">₹0</span>
+                </div>
+
+
+                <div class="summary-row">
                     <span class="summary-label">Tax</span>
                     <span class="summary-value summary-tax">₹0</span>
                 </div>
-         
+
                 <div class="summary-row">
                     <span class="summary-label">Total In Product Discount</span>
                     <span class="summary-value summary-tax">₹0</span>
@@ -39,9 +45,14 @@
                     <span class="summary-value summary-total-amount">₹0</span>
                 </div>
 
-                <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+                <a href="/pages/cart/checkout.html" class="checkout-btn">Proceed to Checkout</a>
                 <a href="/index.html" class="continue-shopping">Continue Shopping</a>
             </div>
+            
+            <p class="shipping-note">
+                <i class="fas fa-truck"></i> Orders above ₹300 get free shipping! Otherwise, ₹50 shipping charge
+                applies.
+            </p>
 
             <!-- Empty Cart State (hidden by default) -->
             <div class="empty-cart">

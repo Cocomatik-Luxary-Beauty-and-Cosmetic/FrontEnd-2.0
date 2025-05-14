@@ -3,6 +3,24 @@ const token = localStorage.getItem("authToken");
 document.addEventListener("DOMContentLoaded", () => {
     fetchAddressData();
     fetchCartData();
+
+    // Attach event to "Continue to Payment" button
+    const continueBtn = document.querySelector(".navigation-buttons .btn[href='/pages/cart/payment.html']");
+    if (continueBtn) {
+        continueBtn.addEventListener("click", (e) => {
+            const selectedOption = document.querySelector(".address-option.selected");
+            if (selectedOption) {
+                const addressId = selectedOption.getAttribute("data-id");
+                if (addressId) {
+                    localStorage.setItem("selectedAddressId", addressId);
+                    console.log("Selected Address ID saved to localStorage:", addressId);
+                }
+            } else {
+                e.preventDefault(); // prevent navigation
+                alert("Please select an address before continuing to payment.");
+            }
+        });
+    }
 });
 
 function fetchAddressData() {
@@ -13,75 +31,54 @@ function fetchAddressData() {
             "Authorization": `token ${token}`
         }
     })
-        .then(res => res.json())
-        .then(addresses => {
-            const addressContainer = document.querySelector(".saved-addresses");
-            addressContainer.innerHTML = ""; // clear any static HTML
+    .then(res => res.json())
+    .then(addresses => {
+        const addressContainer = document.querySelector(".saved-addresses");
+        addressContainer.innerHTML = "";
 
-            addresses.forEach((addr, index) => {
-                const addressDiv = document.createElement("div");
-                addressDiv.classList.add("address-option");
-                if (index === 0) addressDiv.classList.add("selected"); // first one selected by default
+        addresses.forEach((addr, index) => {
+            const addressDiv = document.createElement("div");
+            addressDiv.classList.add("address-option");
+            addressDiv.setAttribute("data-id", addr.id); // 👈 store id on the element
+            if (index === 0) addressDiv.classList.add("selected");
 
-                addressDiv.innerHTML = `
-                    <input type="radio" name="address"}>
-                    <div class="address-details">
-                        <div class="address-type">
-                            <i class="fas fa-${addr.address_type === "Home" ? "home" : "briefcase"}"></i> ${addr.address_type}
-                        </div>
-                        <div class="address-text">
-                            <p>${addr.name}</p>
-                            <p>${addr.house_no}, ${addr.street}, ${addr.locality}</p>
-                            <p>${addr.city}, ${addr.district}, ${addr.state} - ${addr.pincode}</p>
-                            <p>India</p>
-                            <p>Phone: ${addr.contact_no}</p>
-                        </div>
+            addressDiv.innerHTML = `
+                <input type="radio" name="address">
+                <div class="address-details">
+                    <div class="address-type">
+                        <i class="fas fa-${addr.address_type === "Home" ? "home" : "briefcase"}"></i> ${addr.address_type}
                     </div>
-                `;
+                    <div class="address-text">
+                        <p>${addr.name}</p>
+                        <p>${addr.house_no}, ${addr.street}, ${addr.locality}</p>
+                        <p>${addr.city}, ${addr.district}, ${addr.state} - ${addr.pincode}</p>
+                        <p>India</p>
+                        <p>Phone: ${addr.contact_no}</p>
+                    </div>
+                </div>
+            `;
+            addressContainer.appendChild(addressDiv);
+        });
 
-                addressContainer.appendChild(addressDiv);
-                // After injecting addresses
-                const addressRadios = document.querySelectorAll(".address-option input[type='radio']");
-
-                document.querySelectorAll('.address-option').forEach(option => {
-                    option.addEventListener('click', () => {
-                        // Check the radio inside this block
-                        const radio = option.querySelector('input[type="radio"]');
-                        if (radio) radio.checked = true;
-
-                        // Remove 'selected' from all
-                        document.querySelectorAll('.address-option').forEach(opt => {
-                            opt.classList.remove('selected');
-                        });
-
-                        // Add 'selected' to current
-                        option.classList.add('selected');
-                    });
+        document.querySelectorAll('.address-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.address-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                    const radio = opt.querySelector('input[type="radio"]');
+                    if (radio) radio.checked = false;
                 });
 
-
+                option.classList.add('selected');
+                const selectedRadio = option.querySelector('input[type="radio"]');
+                if (selectedRadio) selectedRadio.checked = true;
             });
-
-            // 🔁 Iterate and log each address
-            const addressOptions = addressContainer.querySelectorAll(".address-option");
-            addressOptions.forEach((addressDiv, i) => {
-                const isSelected = addressDiv.classList.contains("selected");
-                const addressText = addressDiv.querySelector(".address-text").innerText.trim();
-                console.log(`Address ${i + 1}:`);
-                console.log("Selected:", isSelected);
-                console.log("Details:\n", addressText);
-            });
-        })
-        .catch(error => console.error("Address Load Error:", error));
+        });
+    })
+    .catch(error => console.error("Address Load Error:", error));
 }
-
 
 function fetchCartData() {
     const orderItemsDiv = document.querySelector(".order-items");
-    const subtotalSpan = document.getElementById("summary-subtotal");
-    const taxSpan = document.getElementById("summary-tax");
-    const totalSpan = document.getElementById("summary-total");
-    const shippingSpan = document.getElementById("summary-shipping");
 
     fetch("https://engine.cocomatik.com/api/orders/cart/", {
         method: "GET",
@@ -95,7 +92,7 @@ function fetchCartData() {
         return response.json();
     })
     .then(data => {
-        orderItemsDiv.innerHTML = ""; // Clear previous items
+        orderItemsDiv.innerHTML = "";
 
         let totalMRP = 0;
         let totalActual = 0;
@@ -112,7 +109,7 @@ function fetchCartData() {
             const itemHTML = `
                 <div class="order-item">
                     <div class="order-item-image">
-                        <img src="https://engine.cocomatik.com/media/${product.display_image}" alt="${product.name}">
+                        <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
                         <span class="item-quantity">${quantity}</span>
                     </div>
                     <div class="order-item-details">
@@ -123,18 +120,21 @@ function fetchCartData() {
             `;
             orderItemsDiv.insertAdjacentHTML("beforeend", itemHTML);
         });
-
-        // Pricing details
-        const tax = Math.round(totalActual * 0.1); // assuming 10% tax
-        const shipping = 0; // flat shipping
-        const total = totalActual + tax + shipping;
-
-        subtotalSpan.textContent = `₹${totalActual.toFixed(2)}`;
-        taxSpan.textContent = `₹${tax}`;
-        shippingSpan.textContent = `₹${shipping}`;
-        totalSpan.textContent = `₹${total.toFixed(2)}`;
+        const shippingCharge = totalActual >= 300 ? 0 : 50;
+        const summaryValues = document.querySelectorAll(".summary-value");
+        if (summaryValues.length >= 4) {
+            summaryValues[0].textContent = formatCurrency(totalMRP);                      // Subtotal
+            summaryValues[1].textContent = formatCurrency(shippingCharge);                             // Tax (assumed 0)
+            summaryValues[2].textContent = formatCurrency(0);                             // Tax (assumed 0)
+            summaryValues[3].textContent = formatCurrency(totalMRP - totalActual);        // Discount
+            summaryValues[4].textContent = formatCurrency(totalActual+shippingCharge);                   // Total
+        }
     })
     .catch(error => {
         console.error("Cart Load Error:", error);
     });
+}
+
+function formatCurrency(amount) {
+    return `₹${amount.toFixed(2)}`;
 }

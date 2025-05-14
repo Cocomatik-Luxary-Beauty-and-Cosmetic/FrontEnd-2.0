@@ -4,26 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COCOMATIK - Checkout</title>
-    <link rel="stylesheet" href="/css/cart/checkout.css">
+    <title>COCOMATIK - Payment Method</title>
+    <link rel="stylesheet" href="/css/cart/payment.css">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+    <!-- Checkout Header -->
 
     <!-- Checkout Progress -->
     <div class="checkout-progress">
 
         <div class="progress-step">
-            <div class="step-number active">1</div>
-            <div class="step-label active">Shipping</div>
-            <div class="progress-line"></div>
+            <div class="step-number completed">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="step-label">Shipping</div>
+            <div class="progress-line completed"></div>
         </div>
 
         <div class="progress-step">
-            <div class="step-number">2</div>
-            <div class="step-label">Payment</div>
-            <div class="progress-line"></div>
+            <div class="step-number active">2</div>
+            <div class="step-label active">Payment</div>
+            <div class="progress-line active"></div>
         </div>
 
         <div class="progress-step">
@@ -38,23 +42,69 @@
         <div class="checkout-container">
             <!-- Checkout Form -->
             <div class="checkout-form">
+                <h2 class="section-title">Payment Method</h2>
 
-                <h2 class="section-title">Shipping Address</h2>
+                <div class="shipping-info">
+                    <div class="info-header">
+                        <span class="info-title">Shipping to:</span>
+                        <a href="checkout.html" class="change-link">Change</a>
+                    </div>
+                    <div class="info-details">
 
-                <div class="saved-addresses">
+                    </div>
                 </div>
-                <div class="checkbox-form">
-                    <a href="/pages/address/add-address.html" class="btn"
-                        style="text-decoration: none; background-color: grey;">
-                        Add new Address
-                    </a>
+
+               
+                <div class="payment-methods">
+                    <!-- UPI Payment -->
+                    <div class="payment-method">
+                        <div class="payment-method-header">
+                            <input type="radio" name="payment" id="upi">
+                            <label for="upi" class="payment-method-name">Payment Gateway Online</label>
+                            <div class="payment-method-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                        </div>
+                        <div class="payment-method-content">
+                            <div class="form-group">
+                                <label class="form-label" for="upiId">UPI ID</label>
+                                <input type="text" class="form-control" id="upiId" placeholder="username@upi">
+                            </div>
+                            <p style="color: #666; margin-bottom: 15px;">You will receive a payment request on your UPI
+                                app.</p>
+                        </div>
+                    </div>
+
+                    <!-- Cash on Delivery -->
+                    <div class="payment-method">
+                        <div class="payment-method-header">
+                            <input type="radio" name="payment" id="cod">
+                            <label for="cod" class="payment-method-name">Cash on Delivery</label>
+                            <div class="payment-method-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="payment-method-content">
+                            <p style="color: #666; margin-bottom: 15px;">Pay with cash upon delivery. Please keep exact
+                                change handy.</p>
+                            <p style="color: #e08080;"><i class="fas fa-info-circle"></i> Additional fee of ₹50 applies
+                                for Cash on Delivery.</p>
+                        </div>
+                    </div>
                 </div>
+            <p class="shipping-note">
+                <i class="fas fa-truck"></i> Cash on delivery will cost extra ₹50 ! Go Online
+                applies.
+            </p>
                 <div class="navigation-buttons">
-                    <a href="/pages/cart/cart.html" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Back to Cart
+                    <a href="/pages/cart/checkout.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Shipping
                     </a>
-                    <a href="/pages/cart/payment.html" class="btn">
-                        Continue to Payment <i class="fas fa-arrow-right"></i>
+                    <a href="#" class="btn">
+                        Pay Here <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="" class="btn">
+                        Place Order  <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -100,8 +150,8 @@
                         </div>
                     </div>
                 </div>
-                
 
+               
                 <div class="summary-row">
                     <span class="summary-label">Subtotal</span>
                     <span class="summary-value">₹0</span>
@@ -109,6 +159,10 @@
 
                 <div class="summary-row">
                     <span class="summary-label">Shipping Charges</span>
+                    <span class="summary-value summary-shipping">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">COD Charges</span>
                     <span class="summary-value summary-shipping">₹0</span>
                 </div>
 
@@ -127,10 +181,9 @@
                     <span class="summary-value">₹0</span>
                 </div>
             </div>
-            
         </div>
     </div>
-    <script src="/js/cart/checkout.js"></script>
+    <script src="/js/cart/payment.js"></script>
 </body>
 
 </html>

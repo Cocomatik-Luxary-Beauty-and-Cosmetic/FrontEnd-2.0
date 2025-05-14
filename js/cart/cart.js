@@ -57,38 +57,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         totalMRP += mrp;
                         totalActual += price;
+                        console.log(totalMRP)
+                        console.log(totalActual)
 
                         const itemHTML = `
-        <div class="cart-item">
-            <div class="item-image">
-                <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
-            </div>
-            <div class="item-details">
-                <h3 class="item-name">${product.name}</h3>
-                <p class="item-price">
-                    <del>₹${product.mrp.toFixed(2)}</del> 
-                    <strong>₹${product.price.toFixed(2)}</strong>
-                </p>
-                <div class="item-actions">
-                    <div class="quantity-selector" data-cart-id="${item.id}">
-                        <button class="quantity-btn decrement">-</button>
-                        <input type="text" class="quantity-input" value="${item.quantity}">
-                        <button class="quantity-btn increment">+</button>
-                    </div>
-                    <button class="remove-btn" data-cart-id="${item.id}">
-                        <i class="fas fa-trash-alt"></i> Remove
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
+                            <div class="cart-item">
+                                <div class="item-image">
+                                    <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
+                                </div>
+                                <div class="item-details">
+                                    <h3 class="item-name">${product.name}</h3>
+                                    <p class="item-price">
+                                        <del>₹${product.mrp.toFixed(2)}</del> 
+                                        <strong>₹${product.price.toFixed(2)}</strong>
+                                    </p>
+                                    <div class="item-actions">
+                                        <div class="quantity-selector" data-cart-id="${item.id}">
+                                            <button class="quantity-btn decrement">-</button>
+                                            <input type="text" class="quantity-input" value="${item.quantity}">
+                                            <button class="quantity-btn increment">+</button>
+                                        </div>
+                                        <button class="remove-btn" data-cart-id="${item.id}">
+                                            <i class="fas fa-trash-alt"></i> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                         cartContainer.insertAdjacentHTML("beforeend", itemHTML);
                     });
 
-                    // Update summary values
+                    const shippingCharge = totalActual >= 300 ? 0 : 50;
                     document.querySelector(".summary-subtotal").textContent = formatCurrency(totalMRP);
-                    document.querySelector(".summary-total-amount").textContent = formatCurrency(totalActual);
-                    document.querySelectorAll(".summary-tax")[1].textContent = formatCurrency(totalMRP - totalActual); // Assuming 2nd .summary-tax is 'Total in Product Discount'
+                    document.querySelector(".summary-total-amount").textContent = `₹${(totalActual + shippingCharge).toFixed(2)}`;
+                    document.querySelector(".summary-shipping").textContent = `₹${shippingCharge.toFixed(2)}`;
+                    document.querySelectorAll(".summary-tax")[1].textContent = formatCurrency(totalMRP-totalActual); // Assuming 2nd .summary-tax is 'Total in Product Discount'
 
                 }
             })

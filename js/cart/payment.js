@@ -1,0 +1,148 @@
+const token = localStorage.getItem("authToken");
+const selectedAddressId = localStorage.getItem("selectedAddressId");
+
+let isCODSelected = false;
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchAddressData();
+    fetchCartData();
+
+    // Monitor payment option selection
+    const codRadio = document.getElementById("cod");
+    const upiRadio = document.getElementById("upi");
+
+    codRadio.addEventListener("change", () => {
+        isCODSelected = true;
+        togglePaymentButtons();
+        fetchCartData();
+    });
+
+    upiRadio.addEventListener("change", () => {
+        isCODSelected = false;
+        togglePaymentButtons();
+        fetchCartData();
+    });
+
+    togglePaymentButtons(); // Initial check
+
+    const continueBtn = document.querySelector(".navigation-buttons .btn[href='/pages/cart/payment.html']");
+    if (continueBtn) {
+        continueBtn.addEventListener("click", (e) => {
+            const selectedOption = document.querySelector(".address-option.selected");
+            if (selectedOption) {
+                const addressId = selectedOption.getAttribute("data-id");
+                if (addressId) {
+                    localStorage.setItem("selectedAddressId", addressId);
+                    console.log("Selected Address ID saved to localStorage:", addressId);
+                }
+            } else {
+                e.preventDefault();
+                alert("Please select an address before continuing to payment.");
+            }
+        });
+    }
+});
+
+function fetchAddressData(selectedAddressId) {
+    fetch(`https://engine.cocomatik.com/api/addresses/${selectedAddressId}/`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `token ${token}`
+        }
+    })
+        .then(res => res.json())
+        .then(address => {
+            const adrsContainer = document.querySelector(".info-details");
+
+            if (adrsContainer) {
+                adrsContainer.innerHTML = `
+                <p><strong>${address.name}</strong></p>
+                <p>${address.house_no}, ${address.street}, ${address.locality}</p>
+                <p>${address.city}, ${address.district}, ${address.state} - ${address.pincode}</p>
+                <p>Phone: ${address.contact_no}</p>
+            `;
+            }
+        })
+        .catch(error => console.error("Address Load Error:", error));
+}
+fetchAddressData(selectedAddressId);
+
+function fetchCartData() {
+    const orderItemsDiv = document.querySelector(".order-items");
+
+    fetch("https://engine.cocomatik.com/api/orders/cart/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `token ${token}`
+        }
+    })
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            orderItemsDiv.innerHTML = "";
+
+            let totalMRP = 0;
+            let totalActual = 0;
+
+            data.items.forEach(item => {
+                const product = item.product_details;
+                const quantity = item.quantity;
+                const mrp = product.mrp * quantity;
+                const price = product.price * quantity;
+
+                totalMRP += mrp;
+                totalActual += price;
+
+                const itemHTML = `
+                <div class="order-item">
+                    <div class="order-item-image">
+                        <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
+                        <span class="item-quantity">${quantity}</span>
+                    </div>
+                    <div class="order-item-details">
+                        <h4 class="order-item-name">${product.name}</h4>
+                        <p class="order-item-price">₹${price.toFixed(2)}</p>
+                    </div>
+                </div>
+            `;
+                orderItemsDiv.insertAdjacentHTML("beforeend", itemHTML);
+            });
+
+            const codCharge = isCODSelected ? 50 : 0;
+            const shippingCharge =  totalActual >= 300 ? 0 : 50;
+
+            const summaryValues = document.querySelectorAll(".summary-value");
+            if (summaryValues.length >= 6) {
+                summaryValues[0].textContent = formatCurrency(totalMRP);                    // Subtotal
+                summaryValues[1].textContent = formatCurrency(shippingCharge);              // Shipping Charges
+                summaryValues[2].textContent = formatCurrency(codCharge);              // Shipping Charges
+                summaryValues[3].textContent = formatCurrency(0);                            // Tax (assumed 0)
+                summaryValues[4].textContent = formatCurrency(totalMRP - totalActual);      // Discount
+                summaryValues[5].textContent = formatCurrency(totalActual + shippingCharge); // Total
+            }
+        })
+        .catch(error => {
+            console.error("Cart Load Error:", error);
+        });
+}
+
+function togglePaymentButtons() {
+    const payBtn = document.querySelector(".navigation-buttons a:nth-child(2)");
+    const proceedBtn = document.querySelector(".navigation-buttons a:nth-child(3)");
+
+    if (isCODSelected) {
+        payBtn.style.display = "none";
+        proceedBtn.style.display = "inline-block";
+    } else {
+        payBtn.style.display = "inline-block";
+        proceedBtn.style.display = "none";
+    }
+}
+
+function formatCurrency(amount) {
+    return `₹${amount.toFixed(2)}`;
+}
