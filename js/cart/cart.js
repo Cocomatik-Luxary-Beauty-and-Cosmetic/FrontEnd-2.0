@@ -1,3 +1,8 @@
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("authToken");
     const cartEndpoint = "https://engine.cocomatik.com/api/orders/cart/";
@@ -61,8 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         const itemHTML = `
         <div class="cart-item">
             <div class="item-image">
+            <a href="/pages/product/productdetails.html?product_id=${product.id}">
                 <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
-            </div>
+            </a>
+        </div>
             <div class="item-details">
                 <h3 class="item-name">${product.name}</h3>
                 <p class="item-price">
@@ -177,3 +184,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = '/pages/account/login.html'; // Fallback redirect in case of major errors
+}
