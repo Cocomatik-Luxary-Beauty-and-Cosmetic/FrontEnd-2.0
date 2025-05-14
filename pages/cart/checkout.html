@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COCOMATIK - Checkout</title>
+    <link rel="stylesheet" href="/css/cart/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Checkout Progress -->
+    <div class="checkout-progress">
+
+        <div class="progress-step">
+            <div class="step-number active">1</div>
+            <div class="step-label active">Shipping</div>
+            <div class="progress-line"></div>
+        </div>
+
+        <div class="progress-step">
+            <div class="step-number">2</div>
+            <div class="step-label">Payment</div>
+            <div class="progress-line"></div>
+        </div>
+
+        <div class="progress-step">
+            <div class="step-number">3</div>
+            <div class="step-label">Confirmation</div>
+            <div class="progress-line"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="checkout-container">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+
+                <h2 class="section-title">Shipping Address</h2>
+
+                <div class="saved-addresses">
+                </div>
+                 <div class="checkbox-form">
+                        <a href="addresses.html" class="btn" style="text-decoration: none; background-color: grey;">
+                            Add new Address
+                        </a>
+                    </div>
+                <div class="navigation-buttons">
+                    <a href="cart.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Cart
+                    </a>
+                    <a href="payment.html" class="btn">
+                        Continue to Payment <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2 class="section-title">Order Summary</h2>
+
+                <div class="order-items">
+                    <!-- Item 1 -->
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <img src="https://via.placeholder.com/60" alt="Coconut Oil">
+                            <span class="item-quantity">1</span>
+                        </div>
+                        <div class="order-item-details">
+                            <h4 class="order-item-name">Coconut Oil - Premium Cold Pressed</h4>
+                            <p class="order-item-price">₹499</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <img src="https://via.placeholder.com/60" alt="Coconut Scrub">
+                            <span class="item-quantity">2</span>
+                        </div>
+                        <div class="order-item-details">
+                            <h4 class="order-item-name">Coconut Scrub - Exfoliating</h4>
+                            <p class="order-item-price">₹698</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <img src="https://via.placeholder.com/60" alt="Coconut Milk Shampoo">
+                            <span class="item-quantity">1</span>
+                        </div>
+                        <div class="order-item-details">
+                            <h4 class="order-item-name">Coconut Milk Shampoo</h4>
+                            <p class="order-item-price">₹399</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value">₹1,596</span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Shipping</span>
+                    <span class="summary-value">₹0</span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Tax</span>
+                    <span class="summary-value">₹159</span>
+                </div>
+
+                <div class="summary-row summary-total">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value">₹1,755</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/cart/checkout.js"></script>
+</body>
+
+</html>
