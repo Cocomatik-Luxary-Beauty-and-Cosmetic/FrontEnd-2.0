@@ -30,13 +30,10 @@ document.addEventListener("DOMContentLoaded", function () { // 🔐 Replace with
             if (data.gender === "male" || data.gender === "female") {
                 document.querySelector(`input[name="gender"][value="${data.gender}"]`).checked = true;
             } else {
-                // Default to "Other" if not male/female
                 document.querySelector(`input[name="gender"][value="other"]`).checked = true;
             }
-            let username =`${data.first_name} ${data.last_name}`;
-            let gender =data.gender
-            localStorage.setItem("username", username);
-            localStorage.setItem("gender", gender);
+            localStorage.setItem("username", `${data.first_name} ${data.last_name}`);
+            localStorage.setItem("gender", data.gender);
 
 
         })
