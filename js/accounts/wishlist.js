@@ -28,6 +28,14 @@ try {
       const skuList = data.map(item => item.product_details.sku);
       localStorage.setItem("wishlistSku", JSON.stringify(skuList));
 
+      // Check if wishlist is empty and update the emptyWishlist element style
+      const emptyWishlist = document.getElementById('emptyWishlist');
+      if (data.length === 0) {
+        emptyWishlist.style.display = 'flex';
+      } else {
+        emptyWishlist.style.display = 'none';
+      }
+
       renderWishlistCards(data);
     })
     .catch(error => {
@@ -105,7 +113,7 @@ try {
       console.error("Error removing wishlist item:", error);
     });
   }
-  
+
 } catch (error) {
   console.error('Critical error:', error);
   window.location.href = 'login.html';
