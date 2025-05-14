@@ -135,7 +135,7 @@ function cancelOrder(orderNumber, createdAt) {
     const now = new Date();
     const diffInMinutes = (now - orderTime) / (1000 * 60);
 
-    if (diffInMinutes > 1) {  // Changed from 1 minute to 2 hours for valid cancellations
+    if (diffInMinutes > 120) {  // Changed from 1 minute to 2 hours for valid cancellations
         alert("This order can no longer be cancelled (over 2 hours old).");
         return;
     }
