@@ -64,7 +64,7 @@ async function fetchAndRenderOrder() {
                     <tr>
                         <td data-label="Image">
                             <div class="product-image">
-                                <img src="${pd.display_image}" alt="${pd.name}" style="width:60px;">
+                                <img src="https://res.cloudinary.com/cocomatik/image/upload/v1744724253/${pd.display_image}" alt="${pd.name}" style="width:60px;">
                             </div>
                         </td>
                         <td data-label="Product">

@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <span class="order-id">Order #${order.order_number}</span>
                                 <span class="order-date">Placed on ${new Date(order.created_at).toLocaleDateString()}</span>
                             </div>
-                            <span class="order-status status-pending">Pending</span>
+                            <span class="order-status status-pending">${order.status}</span>
                         </div>
                         <div class="order-items">
                             ${renderItems(order.cart_items)}
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <span class="order-id">Order #${order.order_number}</span>
                                 <span class="order-date">Placed on ${new Date(order.created_at).toLocaleDateString()}</span>
                             </div>
-                            <span class="order-status status-delivered">Processing</span>
+                            <span class="order-status status-delivered">${order.status}</span>
                         </div>
                         <div class="order-items">
                             ${renderItems(order.items)}
