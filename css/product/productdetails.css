@@ -124,7 +124,7 @@ color: gray;
 }
 .productDetail-btns-box{
     width: 100%;
-    height: 80px;
+ height: auto;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -132,7 +132,7 @@ color: gray;
 }
 .productDetail-btns{
     width: 40%;
-    height: 60%;
+    height: 45px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -149,10 +149,11 @@ background-color: var(--accent);
 color: white;
 }
 #productDetailMsg{
-    width: 80%;
-    padding: 5px;
+width: 80%;
+padding: 10px;
  display: flex;
  justify-content: center;
  align-items: center;
  color: gray;
+ margin-top: 20px;
 }

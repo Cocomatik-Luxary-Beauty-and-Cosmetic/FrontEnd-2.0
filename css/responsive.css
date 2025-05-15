@@ -88,7 +88,16 @@
 .otp-header h2{font-size: 15px;text-align: center;}
 .otp-header p{font-size: 12px;text-align: center;}
 .otp-inputs input {width: 40px;height: 40px;}
+
+
+
+
+.productDetails-container{display: flex;flex-direction: column;height: auto;margin-top: 20px;}
+.productDetails-img-box ,.productDetails-Details-box {width: 100%;}
+.productDetail-btns-box{ justify-content: space-around;align-items: center;}
+
+
+
 }
 
 
-b
