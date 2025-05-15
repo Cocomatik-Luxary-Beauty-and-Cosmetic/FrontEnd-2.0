@@ -1,4 +1,8 @@
-const token = localStorage.getItem("authToken");
+try{
+    const token = localStorage.getItem('authToken');
+    if(!token){
+        window.location.href = '/pages/account/login.html';
+    }
 const selectedAddressId = localStorage.getItem("selectedAddressId");
 
 let isCODSelected = false;
@@ -145,4 +149,8 @@ function togglePaymentButtons() {
 
 function formatCurrency(amount) {
     return `₹${amount.toFixed(2)}`;
+}
+} catch (error) {
+    console.error('Critical error:', error);
+    window.location.href = '/pages/account/login.html'; // Fallback redirect in case of major errors
 }
