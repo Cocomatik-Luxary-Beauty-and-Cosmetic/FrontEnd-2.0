@@ -2,12 +2,14 @@ const token = localStorage.getItem("authToken");
 const selectedAddressId = localStorage.getItem("selectedAddressId");
 
 let isCODSelected = false;
+let totalActual = 0;
+let shippingCharge = 0;
+let codCharge = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetchAddressData();
+    fetchAddressData(selectedAddressId);
     fetchCartData();
 
-    // Monitor payment option selection
     const codRadio = document.getElementById("cod");
     const upiRadio = document.getElementById("upi");
 
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchCartData();
     });
 
-    togglePaymentButtons(); // Initial check
+    togglePaymentButtons(); // Initial toggle check
 
     const continueBtn = document.querySelector(".navigation-buttons .btn[href='/pages/cart/payment.html']");
     if (continueBtn) {
@@ -41,6 +43,51 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    const proceedBtn = document.querySelector(".navigation-buttons a:nth-child(3)");
+    if (proceedBtn) {
+        proceedBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const selectedAddressId = localStorage.getItem("selectedAddressId");
+            if (!selectedAddressId) {
+                alert("Please select an address before proceeding.");
+                return;
+            }
+
+            // Prepare values for order placement
+            codCharge = isCODSelected ? 50 : 0;
+            shippingCharge = totalActual >= 300 ? 0 : 50;
+
+            fetch("https://engine.cocomatik.com/api/orders/place/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `token ${token}`
+                },
+                body: JSON.stringify({
+                    address_id: selectedAddressId,
+                    payment_mode: isCODSelected ? "COD" : "PG",
+                    shipping_charges: shippingCharge,
+                    cod_charges: codCharge
+                })
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Order placement failed");
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data)
+                    const orderNumber = data.order_id;
+                        window.location.href = `/pages/cart/confirmation.html?order_number=${orderNumber}`;
+                        localStorage.removeItem("selectedAddressId")
+                })
+                .catch(err => {
+                    console.error("Order Placement Error:", err);
+                    alert("Failed to place order. Try again later.");
+                });
+        });
+    }
 });
 
 function fetchAddressData(selectedAddressId) {
@@ -54,19 +101,17 @@ function fetchAddressData(selectedAddressId) {
         .then(res => res.json())
         .then(address => {
             const adrsContainer = document.querySelector(".info-details");
-
             if (adrsContainer) {
                 adrsContainer.innerHTML = `
-                <p><strong>${address.name}</strong></p>
-                <p>${address.house_no}, ${address.street}, ${address.locality}</p>
-                <p>${address.city}, ${address.district}, ${address.state} - ${address.pincode}</p>
-                <p>Phone: ${address.contact_no}</p>
-            `;
+                    <p><strong>${address.name}</strong></p>
+                    <p>${address.house_no}, ${address.street}, ${address.locality}</p>
+                    <p>${address.city}, ${address.district}, ${address.state} - ${address.pincode}</p>
+                    <p>Phone: ${address.contact_no}</p>
+                `;
             }
         })
         .catch(error => console.error("Address Load Error:", error));
 }
-fetchAddressData(selectedAddressId);
 
 function fetchCartData() {
     const orderItemsDiv = document.querySelector(".order-items");
@@ -86,7 +131,7 @@ function fetchCartData() {
             orderItemsDiv.innerHTML = "";
 
             let totalMRP = 0;
-            let totalActual = 0;
+            totalActual = 0; // reset global totalActual
 
             data.items.forEach(item => {
                 const product = item.product_details;
@@ -98,31 +143,31 @@ function fetchCartData() {
                 totalActual += price;
 
                 const itemHTML = `
-                <div class="order-item">
-                    <div class="order-item-image">
-                        <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
-                        <span class="item-quantity">${quantity}</span>
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
+                            <span class="item-quantity">${quantity}</span>
+                        </div>
+                        <div class="order-item-details">
+                            <h4 class="order-item-name">${product.name}</h4>
+                            <p class="order-item-price">₹${price.toFixed(2)}</p>
+                        </div>
                     </div>
-                    <div class="order-item-details">
-                        <h4 class="order-item-name">${product.name}</h4>
-                        <p class="order-item-price">₹${price.toFixed(2)}</p>
-                    </div>
-                </div>
-            `;
+                `;
                 orderItemsDiv.insertAdjacentHTML("beforeend", itemHTML);
             });
 
-            const codCharge = isCODSelected ? 50 : 0;
-            const shippingCharge =  totalActual >= 300 ? 0 : 50;
+            codCharge = isCODSelected ? 50 : 0;
+            shippingCharge = totalActual >= 300 ? 0 : 50;
 
             const summaryValues = document.querySelectorAll(".summary-value");
             if (summaryValues.length >= 6) {
-                summaryValues[0].textContent = formatCurrency(totalMRP);                    // Subtotal
-                summaryValues[1].textContent = formatCurrency(shippingCharge);              // Shipping Charges
-                summaryValues[2].textContent = formatCurrency(codCharge);              // Shipping Charges
-                summaryValues[3].textContent = formatCurrency(0);                            // Tax (assumed 0)
-                summaryValues[4].textContent = formatCurrency(totalMRP - totalActual);      // Discount
-                summaryValues[5].textContent = formatCurrency(totalActual + shippingCharge); // Total
+                summaryValues[0].textContent = formatCurrency(totalMRP);                     // Subtotal
+                summaryValues[1].textContent = formatCurrency(shippingCharge);               // Shipping
+                summaryValues[2].textContent = formatCurrency(codCharge);                    // COD
+                summaryValues[3].textContent = formatCurrency(0);                            // Tax
+                summaryValues[4].textContent = formatCurrency(totalMRP - totalActual);       // Discount
+                summaryValues[5].textContent = formatCurrency(totalActual + shippingCharge + codCharge); // Total
             }
         })
         .catch(error => {

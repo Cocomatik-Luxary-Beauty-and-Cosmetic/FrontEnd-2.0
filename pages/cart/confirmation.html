@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COCOMATIK - Order Confirmation</title>
+    <link rel="stylesheet" href="/css/cart/confirmation.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="confirmation-card">
+      <div class="success-icon"><i class="fas fa-check"></i></div>
+      <h1 class="confirmation-title">Thank You for Your Order!</h1>
+      <p class="confirmation-message">
+        Your order has been placed successfully.<br>
+        Your order number is <span class="order-number"></span>.
+      </p>
+      <div class="estimated-delivery">
+        <p class="delivery-title">Estimated Delivery</p>
+        <p class="delivery-date" id="delivery-range"></p>
+      </div>
+    </div>
+
+    <div class="order-details">
+      <h2 class="section-title">Order Details</h2>
+      <div class="order-info">
+        <div class="info-column">
+          <h3 class="info-title">Shipping Address</h3>
+          <div class="info-content" id="shipping-address"></div>
+        </div>
+
+        <div class="info-column">
+          <h3 class="info-title">Payment Method</h3>
+          <div class="info-content" id="payment-method"></div>
+        </div>
+
+        <div class="info-column">
+          <h3 class="info-title">Shipping Method</h3>
+          <div class="info-content">
+            <p>Standard Shipping</p>
+            <p>Delivery in 3-7 business days</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Items Ordered</h3>
+      <div class="order-items" id="order-items"></div>
+
+      <div class="order-summary" id="order-summary"></div>
+    </div>
+
+    <div class="action-buttons">
+      <a href="/index.html" class="btn">Continue Shopping</a>
+      <a href="/pages/orders/orders.html" class="btn btn-secondary">Go to Your Orders</a>
+      <a href="#" class="btn btn-secondary" onclick="window.print()">Print Receipt</a>
+    </div>
+  </div>
+    <script src="/js/cart/confirmation.js"></script>
+</body>
+</html>

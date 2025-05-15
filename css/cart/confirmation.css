@@ -1,0 +1,282 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Header Styles */
+.checkout-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: #e08080;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* Main Content */
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.confirmation-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #e8f5e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.success-icon i {
+    font-size: 40px;
+    color: #4caf50;
+}
+
+.confirmation-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.confirmation-message {
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.order-number {
+    font-weight: 600;
+    color: #e08080;
+}
+
+.order-details {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.info-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.info-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.info-content {
+    line-height: 1.5;
+    color: #666;
+}
+
+.order-items {
+    margin-bottom: 30px;
+}
+
+.order-item {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.item-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.item-price {
+    color: #e08080;
+    font-weight: 600;
+}
+
+.item-quantity {
+    color: #666;
+    font-size: 14px;
+}
+
+.order-summary {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.summary-label {
+    color: #666;
+}
+
+.summary-value {
+    font-weight: 500;
+}
+
+.summary-total {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 25px;
+    background-color: #e08080;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #d06060;
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e5e5;
+}
+
+.estimated-delivery {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff8e1;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.delivery-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ff8f00;
+}
+
+.delivery-date {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .confirmation-card,
+    .order-details {
+        padding: 20px;
+    }
+
+    .order-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
