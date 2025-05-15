@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 productBox.innerHTML = `
                     <div id="special-type-product-img">
-                     <img src="/assets/product/hair2.png" alt="${title}">
+                     <img src="${imageUrl}" alt="${title}">
                     </div>
                     <div id="special-type-product-details">
                         <div id="special-type-product-name">${title}</div>
