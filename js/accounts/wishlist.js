@@ -72,7 +72,7 @@ try {
         </div>
         <div class="stock-status ${stockClass}">${stockStatus}</div>
         <div>
-          <button class="add-cart-btn" id="addToCart-${index}">Details</button>
+          <button class="add-cart-btn" id="addToCart-${index}">View Product</button>
         </div>
       `;
       wishlistCartBox.appendChild(card);
