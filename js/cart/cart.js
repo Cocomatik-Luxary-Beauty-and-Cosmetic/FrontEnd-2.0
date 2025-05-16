@@ -68,9 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const itemHTML = `
         <div class="cart-item">
             <div class="item-image">
-            <a href="/pages/product/productdetails.html?product_id=${product.id}">
                 <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.name}">
-            </a>
         </div>
             <div class="item-details">
                 <h3 class="item-name">${product.name}</h3>
