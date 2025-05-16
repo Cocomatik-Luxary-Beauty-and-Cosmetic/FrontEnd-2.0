@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             imgContainer.innerHTML = `
                 <img src="https://res.cloudinary.com/cocomatik/${imageList[currentImageIndex]}" 
                      alt="${product.title}" width="100">
-                <button class="slider-btn left" id="prevBtn">&#8592;</button>
-                <button class="slider-btn right" id="nextBtn">&#8594;</button>
+                <button class="slider-btn left" id="prevBtn"><i class='bx bx-chevron-left' ></i></button>
+                <button class="slider-btn right" id="nextBtn"><i class='bx bx-chevron-right'></i></button>
             `;
             addSliderEvents(); // Re-bind buttons
         };
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (extraImgContainer && product.extra_images && product.extra_images.length > 0) {
             extraImgContainer.innerHTML = product.extra_images.map(img =>
                 `<img src="https://res.cloudinary.com/cocomatik/${img.image}" 
-                      alt="Extra Image" width="80" style="margin-right: 5px;">`
+                      alt="Extra Image" width="100" style="margin-right: 5px;">`
             ).join("");
         }
 
