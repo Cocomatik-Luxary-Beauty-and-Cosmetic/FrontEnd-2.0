@@ -42,7 +42,7 @@ display: flex;
 /* justify-content: center; */
 align-items: center;
 overflow: hidden;
-display: none; 
+/* display: none;  */
 
 }
 
@@ -186,7 +186,7 @@ border-radius: 20px;
 display: flex;
 align-items: center;
 overflow: hidden;
-/* display: none; */
+display: none;
 background-position: center;
 background-size: contain;
 background-repeat: no-repeat;
