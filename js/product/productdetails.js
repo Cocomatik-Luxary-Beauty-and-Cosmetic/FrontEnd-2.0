@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async function () {
   // Create search popup elements
   const searchPopupOverlay = document.createElement("div")
   searchPopupOverlay.className = "search-popup-overlay"
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.body.appendChild(searchPopupOverlay)
 
   // Function to show search popup
-  window.showSearchPopup = () => {
+  window.showSearchPopup = function () {
     searchPopupOverlay.classList.add("active")
     searchPopupContainer.classList.add("active")
     document.getElementById("searchInput").focus()
@@ -66,12 +66,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   searchInput.addEventListener("input", () => {
     clearTimeout(searchTimeout)
     const searchTerm = searchInput.value.trim()
-
+    
     if (searchTerm.length < 2) {
       searchResults.innerHTML = ""
       return
     }
-
+    
     searchTimeout = setTimeout(() => {
       fetchSearchResults(searchTerm)
     }, 300)
@@ -80,27 +80,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch search results
   async function fetchSearchResults(searchTerm) {
     searchResults.innerHTML = '<div class="search-loading"><i class="fas fa-spinner fa-spin"></i> Searching...</div>'
-
+    
     try {
       // Fetch from both APIs
       const [pocoResponse, pojoResponse] = await Promise.all([
         fetch(`https://engine.cocomatik.com/api/pocos/search/?q=${encodeURIComponent(searchTerm)}`),
-        fetch(`https://engine.cocomatik.com/api/pojos/search/?q=${encodeURIComponent(searchTerm)}`),
+        fetch(`https://engine.cocomatik.com/api/pojos/search/?q=${encodeURIComponent(searchTerm)}`)
       ])
-
+      
       if (!pocoResponse.ok || !pojoResponse.ok) {
         throw new Error("Search failed")
       }
-
+      
       const pocoData = await pocoResponse.json()
       const pojoData = await pojoResponse.json()
-
+      
       // Combine results
-      const combinedResults = [
-        ...pocoData.map((item) => ({ ...item, type: "POCO" })),
-        ...pojoData.map((item) => ({ ...item, type: "POJO" })),
-      ]
-
+      const combinedResults = [...pocoData.map(item => ({...item, type: "POCO"})), 
+                              ...pojoData.map(item => ({...item, type: "POJO"}))]
+      
       displaySearchResults(combinedResults)
     } catch (error) {
       console.error("Search error:", error)
@@ -114,26 +112,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       searchResults.innerHTML = '<div class="search-no-results">No products found. Try a different search term.</div>'
       return
     }
-
-    const resultsHTML = results
-      .slice(0, 5)
-      .map(
-        (product) => `
+    
+    const resultsHTML = results.slice(0, 5).map(product => `
       <a href="/pages/product/productdetails.html?type=${product.type}&id=${product.sku}" class="search-result-item">
         <div class="search-result-image">
           <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}">
         </div>
         <div class="search-result-info">
           <div class="search-result-title">${product.title}</div>
-          <div class="search-result-price">₹${Number.parseFloat(product.price).toFixed(2)}</div>
+          <div class="search-result-price">₹${parseFloat(product.price).toFixed(2)}</div>
         </div>
       </a>
-    `,
-      )
-      .join("")
-
+    `).join('')
+    
     searchResults.innerHTML = resultsHTML
-
+    
     if (results.length > 5) {
       searchResults.innerHTML += `
         <a href="/pages/search/search-results.html?q=${encodeURIComponent(document.getElementById("searchInput").value.trim())}" 
@@ -142,21 +135,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         </a>
       `
     }
-  }
-
-  // Helper function to check if user is logged in
-  function isUserLoggedIn() {
-    const token = localStorage.getItem("authToken")
-    return !!token // Convert to boolean
-  }
-
-  // Helper function to redirect to login page
-  function redirectToLogin() {
-    // Save current URL to redirect back after login
-    const currentUrl = window.location.href
-    localStorage.setItem("loginRedirect", currentUrl)
-    window.location.href = "/pages/account/login.html"
-    return false
   }
 
   // Get product details from URL parameters instead of localStorage
@@ -171,13 +149,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!productId || !productType) {
     productDetails = JSON.parse(localStorage.getItem("productDetailsId"))
     producttype = localStorage.getItem("producttype")
-
+    
     if (productDetails && productDetails.sku && producttype) {
       // Redirect to the proper URL format
       window.history.replaceState(
-        {},
-        document.title,
-        `/pages/product/productdetails.html?type=${producttype}&id=${productDetails.sku}`,
+        {}, 
+        document.title, 
+        `/pages/product/productdetails.html?type=${producttype}&id=${productDetails.sku}`
       )
     } else {
       console.error("Product ID or type not found")
@@ -197,33 +175,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let currentImageIndex = 0
   let imageList = []
-  let isProductInCart = false
-
-  // Check if product is in cart (only if user is logged in)
-  if (isUserLoggedIn()) {
-    try {
-      const cartResponse = await fetch("https://engine.cocomatik.com/api/orders/cart/", {
-        method: "GET",
-        headers: {
-          Authorization: `token ${localStorage.getItem("authToken")}`,
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (cartResponse.ok) {
-        const cartData = await cartResponse.json()
-
-        // Check if the current product is in the cart
-        if (cartData && cartData.items && Array.isArray(cartData.items)) {
-          isProductInCart = cartData.items.some(
-            (item) => item.product_details && item.product_details.sku === productDetails.sku,
-          )
-        }
-      }
-    } catch (error) {
-      console.error("Error checking cart:", error)
-    }
-  }
 
   try {
     const response = await fetch(`${apiUrl}details/${productDetails.sku}`)
@@ -270,8 +221,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("productDetailName").innerText = product.title
     document.getElementById("productDetailDescription").innerText = product.description
     document.getElementById("productDetailSize").innerText = `Size: ${product.size}`
-    document.getElementById("productDetailMRP").innerText = `MRP ₹${Number.parseFloat(product.mrp).toFixed(2)}`
-    document.getElementById("productDetailPrice").innerText = `₹${Number.parseFloat(product.price).toFixed(2)}`
+    document.getElementById("productDetailMRP").innerText = `MRP ₹${parseFloat(product.mrp).toFixed(2)}`
+    document.getElementById("productDetailPrice").innerText = `₹${parseFloat(product.price).toFixed(2)}`
     document.getElementById("productDetailDiscount").innerText = `Discount: ${product.discount}%`
     document.getElementById("productDetailStaock").innerText = `Stock: ${product.stock} available`
     document.getElementById("productDetailBrand").innerText = `Brand: ${product.brand}`
@@ -306,127 +257,87 @@ document.addEventListener("DOMContentLoaded", async () => {
         )
         .join("")
     }
-
-    // Cart & More Button Events
-    const addtoCard = document.getElementById("addtoCard")
-    const more = document.getElementById("more")
-    const productDetailMsg = document.getElementById("productDetailMsg")
-    const wishlistBtn = document.getElementById("wislistBtn")
-
-    // Update button text based on cart status if user is logged in
-    if (isUserLoggedIn() && isProductInCart) {
-      addtoCard.textContent = "Go to Cart"
-      addtoCard.style.backgroundColor = "#4caf50" // Green color for "Go to Cart"
-    } else {
-      addtoCard.textContent = "Add To Cart"
-      addtoCard.style.backgroundColor = "" // Default color for "Add To Cart"
-    }
-
-    // Handle wishlist button click
-    if (wishlistBtn) {
-      wishlistBtn.addEventListener("click", () => {
-        if (!isUserLoggedIn()) {
-          redirectToLogin()
-          return
-        }
-
-        // Your existing wishlist functionality
-        // This will only execute if the user is logged in
-        console.log("Adding to wishlist:", productDetails.sku)
-        // Add your wishlist code here
-      })
-    }
-
-    addtoCard.addEventListener("click", () => {
-      // Check if user is logged in
-      if (!isUserLoggedIn()) {
-        redirectToLogin()
-        return
-      }
-
-      // If product is already in cart, go to cart page
-      if (isProductInCart) {
-        window.location.href = "/pages/cart/cart.html"
-        return
-      }
-
-      // Otherwise add to cart
-      addtoCard.style.backgroundColor = "gray"
-      setTimeout(() => (addtoCard.style.backgroundColor = ""), 1500)
-
-      const token = localStorage.getItem("authToken")
-      const products = [{ sku: productDetails.sku, quantity: 1 }]
-
-      fetch("https://engine.cocomatik.com/api/orders/cart/add/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `token ${token}`,
-        },
-        body: JSON.stringify({ products }),
-      })
-        .then((response) => {
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-          return response.json()
-        })
-        .then((result) => {
-          productDetailMsg.innerHTML = "Products added to cart successfully"
-          setTimeout(() => {
-            productDetailMsg.innerHTML = ""
-            window.location.href = "/pages/cart/cart.html"
-          }, 1400)
-        })
-        .catch((error) => {
-          console.error("Error:", error)
-          productDetailMsg.innerHTML = "Failed to add products to the cart. Please try again."
-          setTimeout(() => (productDetailMsg.innerHTML = ""), 1400)
-        })
-    })
-
-    more.addEventListener("click", () => {
-      if (producttype === "POJO") {
-        window.location.href = "/pages/jwellery/jwelleryhome.html"
-      } else {
-        window.location.href = "/pages/cosmetic/cosmetichome.html"
-      }
-    })
-
-    // Add share functionality
-    const shareBtn = document.querySelector(".bx-share-alt")
-    if (shareBtn) {
-      shareBtn.addEventListener("click", () => {
-        const shareUrl = window.location.href
-
-        if (navigator.share) {
-          navigator
-            .share({
-              title: document.title,
-              url: shareUrl,
-            })
-            .catch((err) => console.error("Share failed:", err))
-        } else {
-          // Fallback for browsers that don't support Web Share API
-          navigator.clipboard
-            .writeText(shareUrl)
-            .then(() => {
-              const shareMsg = document.createElement("div")
-              shareMsg.className = "share-message"
-              shareMsg.textContent = "Link copied to clipboard!"
-              document.body.appendChild(shareMsg)
-
-              setTimeout(() => {
-                shareMsg.classList.add("show")
-                setTimeout(() => {
-                  shareMsg.classList.remove("show")
-                  setTimeout(() => document.body.removeChild(shareMsg), 300)
-                }, 2000)
-              }, 10)
-            })
-            .catch((err) => console.error("Copy failed:", err))
-        }
-      })
-    }
   } catch (error) {
     console.error("Error fetching product data:", error)
+  }
+
+  // Cart & More Button Events
+  const addtoCard = document.getElementById("addtoCard")
+  const more = document.getElementById("more")
+  const productDetailMsg = document.getElementById("productDetailMsg")
+
+  addtoCard.addEventListener("click", function () {
+    addtoCard.style.backgroundColor = "gray"
+    setTimeout(() => (addtoCard.style.backgroundColor = ""), 1500)
+
+    const token = localStorage.getItem("authToken")
+    const products = [{ sku: productDetails.sku, quantity: 1 }]
+
+    fetch("https://engine.cocomatik.com/api/orders/cart/add/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `token ${token}`,
+      },
+      body: JSON.stringify({ products }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+        return response.json()
+      })
+      .then((result) => {
+        productDetailMsg.innerHTML = "Products added to cart successfully"
+        setTimeout(() => {
+          productDetailMsg.innerHTML = ""
+          window.location.href = "/pages/cart/cart.html"
+        }, 1400)
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        productDetailMsg.innerHTML = "Failed to add products to the cart. Please try again."
+        setTimeout(() => (productDetailMsg.innerHTML = ""), 1400)
+      })
+  })
+
+  more.addEventListener("click", function () {
+    if (producttype === "POJO") {
+      window.location.href = "/pages/jwellery/jwelleryhome.html"
+    } else {
+      window.location.href = "/pages/cosmetic/cosmetichome.html"
+    }
+  })
+
+  // Add share functionality
+  const shareBtn = document.querySelector('.bx-share-alt')
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      const shareUrl = window.location.href
+      
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          url: shareUrl
+        })
+        .catch(err => console.error('Share failed:', err))
+      } else {
+        // Fallback for browsers that don't support Web Share API
+        navigator.clipboard.writeText(shareUrl)
+          .then(() => {
+            const shareMsg = document.createElement('div')
+            shareMsg.className = 'share-message'
+            shareMsg.textContent = 'Link copied to clipboard!'
+            document.body.appendChild(shareMsg)
+            
+            setTimeout(() => {
+              shareMsg.classList.add('show')
+              setTimeout(() => {
+                shareMsg.classList.remove('show')
+                setTimeout(() => document.body.removeChild(shareMsg), 300)
+              }, 2000)
+            }, 10)
+          })
+          .catch(err => console.error('Copy failed:', err))
+      }
+    })
   }
 })
