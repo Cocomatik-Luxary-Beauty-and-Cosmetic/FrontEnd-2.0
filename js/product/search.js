@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             productCard.addEventListener("click", () => {
                 localStorage.setItem("productDetailsId", JSON.stringify({ sku: product.sku }));
+                localStorage.setItem("producttype",product.sku.split("-")[0]);
                 window.location.href = "/pages/product/productdetails.html";
             });
 
