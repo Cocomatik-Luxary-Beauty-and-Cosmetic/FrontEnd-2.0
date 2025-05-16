@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("productDetailMRP").innerText = `MRP ₹${parseFloat(product.mrp).toFixed(2)}`;
         document.getElementById("productDetailPrice").innerText = `₹${parseFloat(product.price).toFixed(2)}`;
         document.getElementById("productDetailDiscount").innerText = `Discount: ${product.discount}%`;
+        document.getElementById("productDetailsImg").innerHTML = `<img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100">`;
         document.getElementById("productDetailStaock").innerText = `Stock: ${product.stock} available`;
         document.getElementById("productDetailBrand").innerText = `Brand: ${product.brand}`;
         document.getElementById("productDetailRating").innerText = `Rating: ⭐${product.rating}`;
