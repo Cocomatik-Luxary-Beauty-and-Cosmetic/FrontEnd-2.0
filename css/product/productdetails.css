@@ -28,14 +28,18 @@
     height: 90%;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     gap: 10px;
+    flex-direction: column;
+    display: flex;
+
 
 }
 #productDetailsImg{
     width: 90%;
     height: 80%;
-background-color: whitesmoke;
+    background-color: whitesmoke;
+
     border-radius: 20px;
     display: flex;
     justify-content: center;
