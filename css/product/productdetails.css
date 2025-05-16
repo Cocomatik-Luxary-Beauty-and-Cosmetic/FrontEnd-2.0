@@ -144,7 +144,7 @@ color: gray;
     font-size: 15px;
     cursor: default;
 }
-#buyNow{
+#more{
     border: 2px solid var(--accent);
     color: var(--accent);
 }

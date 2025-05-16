@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Cart & Buy Now logic
     const addtoCard = document.getElementById("addtoCard");
     const productDetailMsg = document.getElementById("productDetailMsg");
-    const buyNow = document.getElementById("buyNow");
 
     function addToCartAndRedirect(redirect = false) {
         addtoCard.style.backgroundColor = "gray";
@@ -111,6 +110,5 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
     }
 
-    addtoCard.addEventListener("click", () => addToCartAndRedirect(true));
-    buyNow.addEventListener("click", () => addToCartAndRedirect(false));
+    // addtoCard.addEventListener("click", () => addToCartAndRedirect(true));
 });
