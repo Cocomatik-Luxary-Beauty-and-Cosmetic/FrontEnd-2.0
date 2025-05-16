@@ -22,11 +22,7 @@ if (wishlistSku.includes(producTID)) {
 
 // 2. Toggle wishlist on button click
 wislistBtn.addEventListener("click", function () {
-    if (!tokens || !producTID) {
-        console.error("Missing token or product ID");
-        alert("Missing token or product ID");
-        return;
-    }
+    
 
     const isInWishlist = wislistBtn.classList.contains("bxs-heart");
 
