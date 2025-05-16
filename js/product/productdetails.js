@@ -118,48 +118,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         setTimeout(() => {
             buyNow.style.backgroundColor = ""
         }, 1500);
-
-        const addcartId = productId;
-        const quantity = 1;
-
-
-        const token = localStorage.getItem("authToken");
-
-        // Create the products array dynamically
-        const products = [
-            { sku: addcartId, quantity: quantity } // Use the variables directly
-        ];
-
-        fetch('https://engine.cocomatik.com/api/orders/cart/add/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `token ${token}`
-            },
-            body: JSON.stringify({ products })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(result => {
-                console.log('Success:', result);
-                productDetailMsg.innerHTML = "Products added to cart successfully "
-
-                setTimeout(function () {
-                    productDetailMsg.innerHTML = ""
-                    window.location.href = ("/pages/cart/cart.html")
-                }, 1400)
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                productDetailMsg.innerHTML = "Failed to add products to the cart. Please try again."
-                setTimeout(function () {
-                    productDetailMsg.innerHTML = ""
-                }, 1400)
-            });
+        if (producttype=="POCO"){
+            window.location.href = ("/pages/cosmetic/cosmetichome.html")
+        }
+        if (producttype=="POJO"){
+            window.location.href = ("/pages/jwellery/jwelleryhome.html")
+        }
     });
 });
 
