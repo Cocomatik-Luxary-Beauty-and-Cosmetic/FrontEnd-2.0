@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const productDetails = JSON.parse(localStorage.getItem("productDetailsId"));
     const producttype = localStorage.getItem("producttype");
-
-
+    const token = localStorage.getItem("authToken");
 
     console.log(producttype);
 
@@ -12,14 +11,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     const productId = productDetails.sku;
+    let apiUrl = producttype === "POCO"
+        ? "https://engine.cocomatik.com/api/pocos/"
+        : "https://engine.cocomatik.com/api/pojos/";
 
-    let apiUrl = "";
-
-    if (producttype === "POCO") {
-        apiUrl = "https://engine.cocomatik.com/api/pocos/";
-    } else {
-        apiUrl = "https://engine.cocomatik.com/api/pojos/";
-    }
+    let productInCart = false;
 
     try {
         const response = await fetch(apiUrl);
@@ -35,10 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
-        // Store the product ID in a variable
-        const fetchedProductId = product.sku;
-        console.log("Fetched Product ID:", fetchedProductId);
-
         // Update HTML with product details
         document.getElementById("productDetailName").innerText = product.title;
         document.getElementById("productDetailDescription").innerText = product.description;
@@ -46,39 +38,50 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("productDetailMRP").innerText = `MRP ₹${parseFloat(product.mrp).toFixed(2)}`;
         document.getElementById("productDetailPrice").innerText = `₹${parseFloat(product.price).toFixed(2)}`;
         document.getElementById("productDetailDiscount").innerText = `Discount: ${product.discount}%`;
-        document.getElementById("productDetailsImg").innerHTML = `<img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100"></img>`
+        document.getElementById("productDetailsImg").innerHTML = `<img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100">`;
         document.getElementById("productDetailStaock").innerText = `Stock: ${product.stock} available`;
         document.getElementById("productDetailBrand").innerText = `Brand: ${product.brand}`;
         document.getElementById("productDetailRating").innerText = `Rating: ⭐${product.rating}`;
+
+        // Check if product already in cart
+        if (token) {
+            const cartResponse = await fetch('https://engine.cocomatik.com/api/orders/cart/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `token ${token}`
+                }
+            });
+
+            if (cartResponse.ok) {
+                const cartData = await cartResponse.json();
+                const existingItem = cartData.items.find(item => item.sku === productId);
+                if (existingItem) {
+                    productInCart = true;
+                    document.getElementById("addtoCard").innerText = "Product Added to Cart";
+                }
+            }
+        }
 
     } catch (error) {
         console.error("Error fetching product data:", error);
     }
 
-
-
-
-    let addtoCard = document.getElementById("addtoCard");
+    const addtoCard = document.getElementById("addtoCard");
     const productDetailMsg = document.getElementById("productDetailMsg");
 
-
-    addtoCard.addEventListener("click", function () {
-        addtoCard.style.backgroundColor = "gray"
+    addtoCard.addEventListener("click", async function () {
+        addtoCard.style.backgroundColor = "gray";
         setTimeout(() => {
-            addtoCard.style.backgroundColor = ""
+            addtoCard.style.backgroundColor = "";
         }, 1500);
 
-        const addcartId = productId;
+        if (productInCart) {
+            window.location.href = "/pages/cart/cart.html";
+            return;
+        }
+
         const quantity = 1;
-
-        console.log(addcartId, quantity);
-
-        const token = localStorage.getItem("authToken");
-
-        // Create the products array dynamically
-        const products = [
-            { sku: addcartId, quantity: quantity } // Use the variables directly
-        ];
+        const products = [{ sku: productId, quantity }];
 
         fetch('https://engine.cocomatik.com/api/orders/cart/add/', {
             method: 'POST',
@@ -96,36 +99,33 @@ document.addEventListener("DOMContentLoaded", async function () {
             })
             .then(result => {
                 console.log('Success:', result);
-                productDetailMsg.innerHTML = "Products added to cart successfully "
-
-                setTimeout(function () {
-                    productDetailMsg.innerHTML = ""
-                    window.location.href = ("/pages/cart/cart.html")
-                }, 1400)
+                productDetailMsg.innerHTML = "Product added to cart successfully";
+                setTimeout(() => {
+                    productDetailMsg.innerHTML = "";
+                    window.location.href = "/pages/cart/cart.html";
+                }, 1400);
             })
             .catch(error => {
                 console.error('Error:', error);
-                productDetailMsg.innerHTML = "Failed to add products to the cart. Please try again."
-                setTimeout(function () {
-                    productDetailMsg.innerHTML = ""
-                }, 1400)
+                productDetailMsg.innerHTML = "Failed to add product to cart. Please try again.";
+                setTimeout(() => {
+                    productDetailMsg.innerHTML = "";
+                }, 1400);
             });
     });
 
+    const buyNow = document.getElementById("buyNow");
 
     buyNow.addEventListener("click", function () {
-        buyNow.style.backgroundColor = "#d4a5a5"
+        buyNow.style.backgroundColor = "#d4a5a5";
         setTimeout(() => {
-            buyNow.style.backgroundColor = ""
+            buyNow.style.backgroundColor = "";
         }, 1500);
-        if (producttype=="POCO"){
-            window.location.href = ("/pages/cosmetic/cosmetichome.html")
-        }
-        if (producttype=="POJO"){
-            window.location.href = ("/pages/jwellery/jwelleryhome.html")
+
+        if (producttype === "POCO") {
+            window.location.href = "/pages/cosmetic/cosmetichome.html";
+        } else if (producttype === "POJO") {
+            window.location.href = "/pages/jwellery/jwelleryhome.html";
         }
     });
 });
-
-
-

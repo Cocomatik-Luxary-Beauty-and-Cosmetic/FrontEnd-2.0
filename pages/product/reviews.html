@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews Section</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container Styles */
+        .c7r3v1ew5 {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Section Header */
+        .r3v13w-h34d3r {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .r3v13w-t1tl3 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .r3v13w-d35c {
+            color: #666;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Review Stats */
+        .r3v13w-5t4t5 {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .r4t1ng-0v3rv13w {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .r4t1ng-numb3r {
+            font-size: 48px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .r4t1ng-5t4r5 {
+            color: #f8b3c5;
+            font-size: 24px;
+            margin: 5px 0;
+        }
+
+        .r4t1ng-c0unt {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .r4t1ng-b4r5 {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .b4r-c0nt41n3r {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .b4r-l4b3l {
+            width: 30px;
+            text-align: right;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .b4r-0ut3r {
+            flex: 1;
+            height: 8px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .b4r-1nn3r {
+            height: 100%;
+            background-color: #e38ca8;
+            border-radius: 4px;
+        }
+
+        /* Review Form */
+        .r3v13w-f0rm {
+            width: 100%;
+            margin-top: 30px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 30px;
+        }
+
+        .f0rm-t1tl3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Star Rating */
+        .r4t1ng-53l3ct0r {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .r4t1ng-53l3ct0r input {
+            display: none;
+        }
+
+        .r4t1ng-53l3ct0r label {
+            cursor: pointer;
+            font-size: 30px;
+            color: #ddd;
+            padding: 0 5px;
+            transition: all 0.2s ease;
+        }
+
+        .r4t1ng-53l3ct0r label:hover,
+        .r4t1ng-53l3ct0r label:hover ~ label,
+        .r4t1ng-53l3ct0r input:checked ~ label {
+            color: #f8b3c5;
+        }
+
+        /* Review Text Area */
+        .r3v13w-t3xt4r34 {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .r3v13w-t3xt4r34:focus {
+            border-color: #e38ca8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 140, 168, 0.2);
+        }
+
+        /* Submit Button */
+        .subm1t-btn {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            background-color: #e38ca8;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .subm1t-btn:hover {
+            background-color: #d27a98;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 140, 168, 0.3);
+        }
+
+        /* Thank You Message */
+        .th4nk-y0u-m3554g3 {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+
+        /* Using :target to show thank you message */
+        #th4nk-y0u:target {
+            display: block;
+        }
+
+        #th4nk-y0u:target ~ form {
+            display: none;
+        }
+
+        .th4nk-y0u-t1tl3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .th4nk-y0u-d35c {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Review Cards */
+        .r3v13w-c4rd5 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .r3v13w-c4rd {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .r3v13w-c4rd:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .r3v13w-h34d3r {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .u53r-4v4t4r {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #f8d7e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: #e38ca8;
+            font-weight: 600;
+        }
+
+        .u53r-1nf0 {
+            flex: 1;
+        }
+
+        .u53r-n4m3 {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .r3v13w-d4t3 {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .r3v13w-5t4r5 {
+            color: #f8b3c5;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .r3v13w-t1tl3 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .r3v13w-c0nt3nt {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .r3v13w-v3r1f13d {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .v3r1f13d-1c0n {
+            color: #4caf50;
+            margin-right: 5px;
+        }
+
+        /* Pagination */
+        .p4g1n4t10n {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .p4g3-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .p4g3-btn:hover {
+            background-color: #f8d7e0;
+            color: #e38ca8;
+        }
+
+        .p4g3-btn {
+            background-color: #e38ca8;
+            color: white;
+            border-color: #e38ca8;
+        }
+
+        .p4g3-btn.d154bl3d {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .r3v13w-5t4t5 {
+                padding: 15px;
+            }
+            
+            .r3v13w-c4rd5 {
+                grid-template-columns: 1fr;
+            }
+
+            .r4t1ng-53l3ct0r label {
+                font-size: 24px;
+                padding: 0 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .r3v13w-h34d3r {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .u53r-4v4t4r {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .r4t1ng-numb3r {
+                font-size: 36px;
+            }
+
+            .r4t1ng-5t4r5 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="c7r3v1ew5" id="c7r3v1ew5-53ct10n">
+        <div class="r3v13w-h34d3r">
+            <h2 class="r3v13w-t1tl3">Customer Reviews</h2>
+            <p class="r3v13w-d35c">See what our customers are saying about Caffeine Eye Cream</p>
+        </div>
+
+        <div class="r3v13w-5t4t5" id="r3v13w-5t4t5-c0nt41n3r">
+            <div class="r4t1ng-0v3rv13w">
+                <div class="r4t1ng-numb3r">4.8</div>
+                <div class="r4t1ng-5t4r5">★★★★★</div>
+                <div class="r4t1ng-c0unt">Based on 127 reviews</div>
+            </div>
+
+            <div class="r4t1ng-b4r5">
+                <div class="b4r-c0nt41n3r">
+                    <div class="b4r-l4b3l">5★</div>
+                    <div class="b4r-0ut3r">
+                        <div class="b4r-1nn3r" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="b4r-c0nt41n3r">
+                    <div class="b4r-l4b3l">4★</div>
+                    <div class="b4r-0ut3r">
+                        <div class="b4r-1nn3r" style="width: 10%;"></div>
+                    </div>
+                </div>
+                <div class="b4r-c0nt41n3r">
+                    <div class="b4r-l4b3l">3★</div>
+                    <div class="b4r-0ut3r">
+                        <div class="b4r-1nn3r" style="width: 3%;"></div>
+                    </div>
+                </div>
+                <div class="b4r-c0nt41n3r">
+                    <div class="b4r-l4b3l">2★</div>
+                    <div class="b4r-0ut3r">
+                        <div class="b4r-1nn3r" style="width: 1%;"></div>
+                    </div>
+                </div>
+                <div class="b4r-c0nt41n3r">
+                    <div class="b4r-l4b3l">1★</div>
+                    <div class="b4r-0ut3r">
+                        <div class="b4r-1nn3r" style="width: 1%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Form -->
+            <div class="r3v13w-f0rm">
+                <h3 class="f0rm-t1tl3">Write Your Review</h3>
+                
+                <!-- Thank You Message (hidden by default, shown after submission) -->
+                <div class="th4nk-y0u-m3554g3" id="th4nk-y0u">
+                    <h4 class="th4nk-y0u-t1tl3">Thank You for Your Review!</h4>
+                    <p class="th4nk-y0u-d35c">Your feedback helps other customers make informed decisions.</p>
+                </div>
+                
+                <!-- Review Form -->
+                <form action="#th4nk-y0u" method="get">
+                    <!-- Star Rating -->
+                    <div class="r4t1ng-53l3ct0r">
+                        <input type="radio" id="5t4r5" name="r4t1ng" value="5" required />
+                        <label for="5t4r5">★</label>
+                        <input type="radio" id="4t4r5" name="r4t1ng" value="4" />
+                        <label for="4t4r5">★</label>
+                        <input type="radio" id="3t4r5" name="r4t1ng" value="3" />
+                        <label for="3t4r5">★</label>
+                        <input type="radio" id="2t4r5" name="r4t1ng" value="2" />
+                        <label for="2t4r5">★</label>
+                        <input type="radio" id="1t4r" name="r4t1ng" value="1" />
+                        <label for="1t4r">★</label>
+                    </div>
+                    
+                    <!-- Review Text Area -->
+                    <textarea class="r3v13w-t3xt4r34" name="r3v13w-c0nt3nt" placeholder="Write your review here..." required></textarea>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="5ubm1t-btn">Submit Review</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="r3v13w-c4rd5" id="r3v13w-c4rd5-c0nt41n3r">
+            <!-- Review Card 1 -->
+            <div class="r3v13w-c4rd" id="r3v13w-c4rd-1">
+                <div class="r3v13w-h34d3r">
+                    <div class="u53r-4v4t4r">S</div>
+                    <div class="u53r-1nf0">
+                        <div class="u53r-n4m3">Samantha R.</div>
+                        <div class="r3v13w-d4t3">Verified Purchase • May 10, 2025</div>
+                    </div>
+                </div>
+                <div class="r3v13w-5t4r5">★★★★★</div>
+                <h4 class="r3v13w-t1tl3">Amazing results in just 2 weeks!</h4>
+                <p class="r3v13w-c0nt3nt">I've been struggling with dark circles for years and have tried countless products. This caffeine eye cream has made a noticeable difference in just 2 weeks of use. My under-eye area looks brighter and more refreshed. The texture is light and absorbs quickly.</p>
+                <div class="r3v13w-v3r1f13d">
+                    <span class="v3r1f13d-1c0n">✓</span> Verified Purchase
+                </div>
+            </div>
+
+            <!-- Review Card 2 -->
+            <div class="r3v13w-c4rd" id="r3v13w-c4rd-2">
+                <div class="r3v13w-h34d3r">
+                    <div class="u53r-4v4t4r">M</div>
+                    <div class="u53r-1nf0">
+                        <div class="u53r-n4m3">Meera K.</div>
+                        <div class="r3v13w-d4t3">Verified Purchase • April 28, 2025</div>
+                    </div>
+                </div>
+                <div class="r3v13w-5t4r5">★★★★★</div>
+                <h4 class="r3v13w-t1tl3">Worth every penny!</h4>
+                <p class="r3v13w-c0nt3nt">This eye cream is a game changer! I work late nights and my eyes always looked tired. After using this for a month, the difference is remarkable. The caffeine really helps with puffiness and the formula is hydrating without being greasy. Will definitely repurchase!</p>
+                <div class="r3v13w-v3r1f13d">
+                    <span class="v3r1f13d-1c0n">✓</span> Verified Purchase
+                </div>
+            </div>
+
+            <!-- Review Card 3 -->
+            <div class="r3v13w-c4rd" id="r3v13w-c4rd-3">
+                <div class="r3v13w-h34d3r">
+                    <div class="u53r-4v4t4r">R</div>
+                    <div class="u53r-1nf0">
+                        <div class="u53r-n4m3">Rahul T.</div>
+                        <div class="r3v13w-d4t3">Verified Purchase • May 2, 2025</div>
+                    </div>
+                </div>
+                <div class="r3v13w-5t4r5">★★★★☆</div>
+                <h4 class="r3v13w-t1tl3">Good product, small quantity</h4>
+                <p class="r3v13w-c0nt3nt">The eye cream works well for reducing puffiness and dark circles. I've been using it for 3 weeks and can see improvement. My only complaint is that the quantity is quite small for the price. Would give 5 stars if it came in a larger size.</p>
+                <div class="r3v13w-v3r1f13d">
+                    <span class="v3r1f13d-1c0n">✓</span> Verified Purchase
+                </div>
+            </div>
+
+            <!-- Review Card 4 -->
+            <div class="r3v13w-c4rd" id="r3v13w-c4rd-4">
+                <div class="r3v13w-h34d3r">
+                    <div class="u53r-4v4t4r">A</div>
+                    <div class="u53r-1nf0">
+                        <div class="u53r-n4m3">Aisha N.</div>
+                        <div class="r3v13w-d4t3">Verified Purchase • April 15, 2025</div>
+                    </div>
+                </div>
+                <div class="r3v13w-5t4r5">★★★★★</div>
+                <h4 class="r3v13w-t1tl3">Perfect for sensitive skin</h4>
+                <p class="r3v13w-c0nt3nt">I have extremely sensitive skin and most eye creams cause irritation. This one is gentle yet effective! No irritation at all, and it's helped reduce my dark circles significantly. The cooling sensation when applied is so refreshing in the morning. Highly recommend!</p>
+                <div class="r3v13w-v3r1f13d">
+                    <span class="v3r1f13d-1c0n">✓</span> Verified Purchase
+                </div>
+            </div>
+
+            <!-- Review Card 5 -->
+            <div class="r3v13w-c4rd" id="r3v13w-c4rd-5">
+                <div class="r3v13w-h34d3r">
+                    <div class="u53r-4v4t4r">J</div>
+                    <div class="u53r-1nf0">
+                        <div class="u53r-n4m3">James L.</div>
+                        <div class="r3v13w-d4t3">Verified Purchase • May 5, 2025</div>
+                    </div>
+                </div>
+                <div class="r3v13w-5t4r5">★★★★★</div>
+                <h4 class="r3v13w-t1tl3">Great for men too!</h4>
+                <p class="r3v13w-c0nt3nt">As a guy who never used skincare products before, I was skeptical. My girlfriend convinced me to try this for my dark circles, and I'm impressed! It's lightweight, non-greasy, and actually works. The packaging isn't overly feminine either. Definitely recommend for men looking to reduce tired eyes.</p>
+                <div class="r3v13w-v3r1f13d">
+                    <span class="v3r1f13d-1c0n">✓</span> Verified Purchase
+                </div>
+            </div>
+
+            <!-- Review Card 6 -->
+            <div class="r3v13w-c4rd" id="r3v13w-c4rd-6">
+                <div class="r3v13w-h34d3r">
+                    <div class="u53r-4v4t4r">P</div>
+                    <div class="u53r-1nf0">
+                        <div class="u53r-n4m3">Priya M.</div>
+                        <div class="r3v13w-d4t3">Verified Purchase • April 22, 2025</div>
+                    </div>
+                </div>
+                <div class="r3v13w-5t4r5">★★★☆☆</div>
+                <h4 class="r3v13w-t1tl3">Decent but not miraculous</h4>
+                <p class="r3v13w-c0nt3nt">The eye cream has a nice texture and feels good on application. It has helped somewhat with my dark circles, but not as dramatically as I hoped. I've been using it for a month now. It's good for hydration though, and I do notice less puffiness in the morning.</p>
+                <div class="r3v13w-v3r1f13d">
+                    <span class="v3r1f13d-1c0n">✓</span> Verified Purchase
+                </div>
+            </div>
+        </div>
+
+        <div class="p4g1n4t10n" id="r3v13w-p4g1n4t10n">
+            <div class="p4g3-btn d154bl3d">«</div>
+            <div class="p4g3-btn 4ct1v3">1</div>
+            <div class="p4g3-btn">2</div>
+            <div class="p4g3-btn">3</div>
+            <div class="p4g3-btn">4</div>
+            <div class="p4g3-btn">»</div>
+        </div>
+    </div>
+</body>
+</html>
