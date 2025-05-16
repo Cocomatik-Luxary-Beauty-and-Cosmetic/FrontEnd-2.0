@@ -20,10 +20,13 @@
     <!-- Product Details Section -->
     <section id="productDetails" class="productDetails-container">
 
-        <!-- Product Image -->
+        <!-- Product Image with Slider -->
         <section class="productDetails-img-box">
-            <div id="productDetailsImg"></div>
-            <div id="productExtraImages" style="margin-top: 10px;"></div> <!-- Extra Images -->
+            <div id="productDetailsImg">
+                <button class="slider-btn left" onclick="prevImage()">&#10094;</button>
+                <!-- <img id="mainProductImage" src="" alt="Product Image"> -->
+                <button class="slider-btn right" onclick="nextImage()">&#10095;</button>
+            </div>
         </section>
 
         <!-- Product Info -->
@@ -55,12 +58,11 @@
 
             <!-- Action Buttons -->
             <div class="productDetail-btns-box">
-                <div class="productDetail-btns" id="more">More</div>
+                <div class="productDetail-btns" id="more">Buy Now</div>
                 <div class="productDetail-btns" id="addtoCard">Add To Cart</div>
             </div>
 
             <div id="productDetailMsg"></div>
-
         </section>
     </section>
 
@@ -72,6 +74,7 @@
     <script src="/js/main.js"></script>
     <script src="/js/nav/nav.js"></script>
     <script src="/js/product/wishlistPost.js"></script>
+
 
 </body>
 
