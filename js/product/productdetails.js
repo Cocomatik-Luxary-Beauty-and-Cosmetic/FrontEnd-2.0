@@ -111,6 +111,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
     }
 
-    addtoCard.addEventListener("click", () => addToCartAndRedirect(false));
-    buyNow.addEventListener("click", () => addToCartAndRedirect(true));
+    addtoCard.addEventListener("click", () => addToCartAndRedirect(true));
+    buyNow.addEventListener("click", () => addToCartAndRedirect(false));
 });
