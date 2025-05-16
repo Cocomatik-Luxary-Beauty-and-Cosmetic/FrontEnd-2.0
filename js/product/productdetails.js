@@ -73,10 +73,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Cart & Buy Now logic
     const addtoCard = document.getElementById("addtoCard");
+    const more = document.getElementById("more")
     const productDetailMsg = document.getElementById("productDetailMsg");
 
-    function addToCartAndRedirect(redirect = false) {
-        addtoCard.style.backgroundColor = "gray";
+addtoCard.addEventListener("click",function(){
+      addtoCard.style.backgroundColor = "gray";
         setTimeout(() => addtoCard.style.backgroundColor = "", 1500);
 
         const token = localStorage.getItem("authToken");
@@ -108,7 +109,18 @@ document.addEventListener("DOMContentLoaded", async function () {
                 productDetailMsg.innerHTML = "Failed to add products to the cart. Please try again.";
                 setTimeout(() => productDetailMsg.innerHTML = "", 1400);
             });
-    }
+})
 
-    // addtoCard.addEventListener("click", () => addToCartAndRedirect(true));
+more.addEventListener("click",function(){
+if(producttype==="POJO"){
+  window.location.href = "/pages/jwellery/jwelleryhome.html";
+  console(producttype)
+}
+else{
+     window.location.href = "/pages/cosmetic/cosmetichome.html";
+       console(producttype) 
+}
+})
+
+  
 });
