@@ -1,6 +1,18 @@
 @media only screen and (max-width: 600px) {
 
 /* welcomepage  */
+#special-type-product-box{   
+     width: 100%;
+    height: 220px;}
+
+    #special-type-product-name{
+    font-size: 15px;
+    font-weight: bold;
+}
+#special-type-product-about{
+    color: gray;
+      font-size: 12px;
+}
 .brand-type-container{height: 300px;}
 .special-type-menu-box{width: 100%;font-size: 15px;}
 .add-container{height: 300px;}
