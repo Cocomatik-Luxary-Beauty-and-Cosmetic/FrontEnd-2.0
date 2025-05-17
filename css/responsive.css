@@ -86,7 +86,14 @@
 
 
 .search-products-box-container{ padding-left:0px;}
-#search-products-card{width: 95%;height: 450px;}
+#search-products-card{width: 95%;height: 500px;}
+#products-img{
+width: 100%;
+height: 60%;
+}
+#products-dtls{
+width: 100%;
+height: 40%;
 
 
 
