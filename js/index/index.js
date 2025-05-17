@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                      <img src="${imageUrl}" alt="${title}">
                     </div>
                     <div id="special-type-product-details">
-                        <div id="special-type-product-name">${title}</div>
-                        <div id="special-type-product-about">${description}</div>
+                        <div id="special-type-product-name">${title.slice(0, 30)}</div>
+                        <div id="special-type-product-about">${description.slice(0, 20)}..</div>
                         <div id="special-type-product-price">${price}</div>
                     </div>   
                 `;
