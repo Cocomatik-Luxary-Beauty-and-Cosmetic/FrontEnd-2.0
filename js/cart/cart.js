@@ -94,9 +94,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     const shippingCharge = totalActual >= 300 ? 0 : 50;
                     document.querySelector(".summary-subtotal").textContent = formatCurrency(totalMRP);
+                    document.querySelectorAll(".summary-tax")[0].textContent = formatCurrency(totalMRP-totalActual);
+                    document.querySelectorAll(".summary-tax")[1].textContent = formatCurrency(totalActual);
                     document.querySelector(".summary-total-amount").textContent = `₹${(totalActual + shippingCharge).toFixed(2)}`;
                     document.querySelector(".summary-shipping").textContent = `₹${shippingCharge.toFixed(2)}`;
-                    document.querySelectorAll(".summary-tax")[1].textContent = formatCurrency(totalMRP-totalActual); // Assuming 2nd .summary-tax is 'Total in Product Discount'
+                    
 
                 }
             })
