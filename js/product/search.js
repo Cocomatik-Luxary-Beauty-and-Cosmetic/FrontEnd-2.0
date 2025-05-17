@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // Render filtered products
         filteredProducts.forEach(product => {
             const productCard = document.createElement("div");
-            productCard.id = "products-card";
+            productCard.id = "search-products-card";
             productCard.dataset.sku = product.sku;
 
             productCard.innerHTML = `
