@@ -77,22 +77,29 @@ try {
       `;
       wishlistCartBox.appendChild(card);
 
-      // Remove button event
-      const removeBtn = document.getElementById(`removeWishlist-${index}`);
-      removeBtn.addEventListener("click", () => {
-        removeWishlistItem(sku);
-      });
-
-      // ADD TO CART button event
-      const addToCartBtn = document.getElementById(`addToCart-${index}`);
-      addToCartBtn.addEventListener("click", () => {
-        localStorage.setItem("productDetailsId", JSON.stringify({ sku: sku }));
-        localStorage.setItem("producttype", sku.split("-")[0]);
-        window.location.href = "/pages/product/productdetails.html";
-      });
+      const productImg = card.querySelector('.product-image');
+    productImg.style.cursor = 'pointer';
+    productImg.addEventListener("click", () => {
+      localStorage.setItem("productDetailsId", JSON.stringify({ sku: sku }));
+      localStorage.setItem("producttype", sku.split("-")[0]);
+      window.location.href = "/pages/product/productdetails.html";
     });
-  }
 
+    // Remove button event
+    const removeBtn = document.getElementById(`removeWishlist-${index}`);
+    removeBtn.addEventListener("click", () => {
+      removeWishlistItem(sku);
+    });
+
+    // View Product button event
+    const addToCartBtn = document.getElementById(`addToCart-${index}`);
+    addToCartBtn.addEventListener("click", () => {
+      localStorage.setItem("productDetailsId", JSON.stringify({ sku: sku }));
+      localStorage.setItem("producttype", sku.split("-")[0]);
+      window.location.href = "/pages/product/productdetails.html";
+    });
+  });
+}
   function removeWishlistItem(sku) {
     fetch('https://engine.cocomatik.com/api/wishlist/', {
       method: 'DELETE',
