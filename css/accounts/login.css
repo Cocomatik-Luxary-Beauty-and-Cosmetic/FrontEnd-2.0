@@ -555,4 +555,20 @@ background-repeat: no-repeat;
         }
         
 
+    .resend-section {
+    margin-top: 15px;
+    font-size: 12px;
+  }
+
+  .resend-section button {
+    background: none;
+    border: none;
+    color:gray;
+    cursor: pointer;
+    padding: 0;
+    font-weight: bold;
+  }
+#resend-btn{
+  font-size: 12px;
+}
   
