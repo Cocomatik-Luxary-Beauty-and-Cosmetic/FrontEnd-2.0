@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("productDetailStaock").innerText = `Stock: ${product.stock} available`
     document.getElementById("productDetailBrand").innerText = `Brand: ${product.brand}`
     document.getElementById("productDetailRating").innerText = `Rating: ⭐${product.rating}`
+    document.getElementById("Rating").innerText=`${product.rating}`
 
     // Extra thumbnails (optional display)
     const extraImgContainer = document.getElementById("productExtraImages")
