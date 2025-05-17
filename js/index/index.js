@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     </div>
                     <div id="special-type-product-details">
                         <div id="special-type-product-name">${title.slice(0, 30)}</div>
-                        <div id="special-type-product-about">${description.slice(0, 20)}..</div>
+                        <div id="special-type-product-about">${description.slice(0, 50)}..</div>
                         <div id="special-type-product-price">${price}</div>
                     </div>   
                 `;
