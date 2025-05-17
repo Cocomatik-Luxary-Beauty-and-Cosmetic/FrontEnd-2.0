@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const backButton = document.getElementById('backButton');
     const resetOtpBtn = document.getElementById("resetOtpBtn");
     const inputs = document.querySelectorAll('.otp-inputs input');
+    const resendBtn = document.getElementById('resend-btn');
+    const timerSpan = document.getElementById('timer');
+
+    let interval;  // for timer interval, accessible to resend logic
 
     // Handle email form submission
     emailForm.addEventListener('submit', async function(event) {
@@ -38,11 +42,65 @@ document.addEventListener("DOMContentLoaded", () => {
                 OtpLoginBox.style.display = "flex";
             }, 3000);
 
+            startTimer();
+
         } catch (error) {
             alert('Error: ' + error.message);
         }
 
         EmailIdGet.innerHTML = email;
+    });
+
+    // Function to start or restart timer
+    function startTimer() {
+        let timer = 10;
+        resendBtn.disabled = true;
+        resendBtn.style.color = "gray";
+        timerSpan.textContent = timer;
+
+        if (interval) clearInterval(interval);
+
+        interval = setInterval(() => {
+            timer--;
+            timerSpan.textContent = timer;
+            if (timer <= 0) {
+                clearInterval(interval);
+                resendBtn.disabled = false;
+                resendBtn.style.color = "black";
+                timerSpan.textContent = '';
+            }
+        }, 1000);
+    }
+
+    // Handle resend OTP button click
+    resendBtn.addEventListener('click', async () => {
+        const email = localStorage.getItem("userEmail");
+        if (!email) {
+            alert('Email not found. Please enter your email first.');
+            return;
+        }
+
+        resendBtn.disabled = true;
+        resendBtn.style.color = "gray";
+
+        try {
+            const response = await fetch('https://engine.cocomatik.com/api/send_otp_login/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+
+            const result = await response.json();
+            console.log('Resend OTP response:', result);
+
+            startTimer();
+
+        } catch (error) {
+            alert('Error resending OTP: ' + error.message);
+            resendBtn.disabled = false;
+            resendBtn.style.color = "black";
+            timerSpan.textContent = '';
+        }
     });
 
     // Handle OTP inputs navigation
