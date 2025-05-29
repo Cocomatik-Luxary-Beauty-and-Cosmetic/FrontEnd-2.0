@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="logo-box">
         <div class="logo">
             <a href="/index.html">
-                <img src="/assets/data/coco-logo.png" width="200px" alt="Company Logo">
+                <img src="/assets/data/cocomatik-logo.png" width="200px" alt="Company Logo">
             </a>
         </div>
     </div>
