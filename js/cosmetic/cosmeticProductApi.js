@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100">
                         </div>
                         <div id="products-dtls">
-                            <h3 id="product-title">${product.title}</h3>
+                            <h3 id="product-title">${product.title.slice(0, 50)}..</h3>
                             <p id="product-category">${product.category}</p>
                             <p id="product-price">₹${product.price}</p>
                             <button id="add-to-cart">View Product</button>
