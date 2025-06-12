@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             category.objs.forEach(product => {
                 const title = product.title || "No Title Available";
                 const description = product.description || "No Description Available";
-                const price = product.price ? `$ ${product.price}` : "Price Unavailable";
+                const price = product.price;
                 const pr_image = product.display_image || "Image Unavailable";
 
                 // Use a local image file instead of the API image
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <div id="special-type-product-details">
                         <div id="special-type-product-name">${title.slice(0, 30)}</div>
                         <div id="special-type-product-about">${description.slice(0, 50)}..</div>
-                        <div id="special-type-product-price">${price}</div>
+                        <div id="special-type-product-price">₹${price}</div>
                     </div>   
                 `;
                 productBox.addEventListener("click", () => {
