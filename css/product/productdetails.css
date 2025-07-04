@@ -91,6 +91,11 @@
     overflow: hidden;
     gap: 10px;
 }
+#productAbout{
+overflow-y: auto;
+    height: 100% ;
+    width: 100%;
+}
 
 .productDetails-Details-bar {
     width: 100%;

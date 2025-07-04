@@ -16,7 +16,7 @@
 .search-box{display: none;}
 .InputContainer{width: 90%;height: 80%;border-radius: 10px;}
 .mobileview-search-container{display: flex;}
-.logo-box{width: 35%; padding-left: 10px;}
+.logo-box{width: 35%; padding-left: 20px;}
 .btns-icons{ width: 65%;font-size: 15px;display: flex;justify-content: end;}
 .btns-name{font-size: 12px;}
 .ad-container{height: 150px;}
