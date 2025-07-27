@@ -193,7 +193,7 @@ overflow-y: auto;
     color: var(--accent);
 }
 
-#addtoCard {
+#addtoCart {
     background-color: var(--accent);
     color: white;
 }
@@ -402,12 +402,12 @@ overflow-y: auto;
 }
 
 /* Button styles for when product is in cart */
-#addtoCard.in-cart {
+#addtoCart.in-cart {
   background-color: #4caf50 !important;
   color: white;
 }
 
-#addtoCard.in-cart:hover {
+#addtoCart.in-cart:hover {
   background-color: #45a049 !important;
 }
 

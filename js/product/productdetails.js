@@ -309,18 +309,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Cart & More Button Events
-    const addtoCard = document.getElementById("addtoCard")
+    const addtoCart = document.getElementById("addtoCart")
     const more = document.getElementById("more")
     const productDetailMsg = document.getElementById("productDetailMsg")
     const wishlistBtn = document.getElementById("wislistBtn")
 
     // Update button text based on cart status if user is logged in
     if (isUserLoggedIn() && isProductInCart) {
-      addtoCard.textContent = "Go to Cart"
-      addtoCard.style.backgroundColor = "#4caf50" // Green color for "Go to Cart"
+      addtoCart.textContent = "Go to Cart"
+      addtoCart.style.backgroundColor = "#4caf50" // Green color for "Go to Cart"
     } else {
-      addtoCard.textContent = "Add To Cart"
-      addtoCard.style.backgroundColor = "" // Default color for "Add To Cart"
+      addtoCart.textContent = "Add To Cart"
+      addtoCart.style.backgroundColor = "" // Default color for "Add To Cart"
     }
 
     // Handle wishlist button click
@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       })
     }
 
-    addtoCard.addEventListener("click", () => {
+    addtoCart.addEventListener("click", () => {
       // Check if user is logged in
       if (!isUserLoggedIn()) {
         redirectToLogin()
@@ -352,8 +352,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       // Otherwise add to cart
-      addtoCard.style.backgroundColor = "gray"
-      setTimeout(() => (addtoCard.style.backgroundColor = ""), 1500)
+      addtoCart.style.backgroundColor = "gray"
+      setTimeout(() => (addtoCart.style.backgroundColor = ""), 1500)
 
       const token = localStorage.getItem("authToken")
       const products = [{ sku: productDetails.sku, quantity: 1 }]
