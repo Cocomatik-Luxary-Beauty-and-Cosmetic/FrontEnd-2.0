@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             slider.innerHTML = "<p>No ads available</p>";
             return;
         }
+        console.log(ads)
 
         ads.forEach((item, index) => {
             const img = document.createElement("img");
