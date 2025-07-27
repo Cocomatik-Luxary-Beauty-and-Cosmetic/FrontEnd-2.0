@@ -1,14 +1,12 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
-    const jewelryApiUrl = "https://engine.cocomatik.com/api/home/products/all/";
-    const adApiUrl = "https://engine.cocomatik.com/api/pocos/adds/";
-    const cloudinaryBase = "https://res.cloudinary.com/cocomatik/";
+    const productApiUrl = "https://engine.cocomatik.com/api/pojos/";
 
-    // ----------------- LOAD JEWELLERY PRODUCTS -----------------
     try {
-        const response = await fetch(jewelryApiUrl);
-        const products = await response.json();
+        const productResponse = await fetch(productApiUrl);
+        const productData = await productResponse.json();
 
-        const categories = [
+const categories = [
             { name: "Wedding Jewellery", containerId: "products-container" },
             { name: "Pendants", containerId: "products-container2" },
             { name: "One Gram Golden Jewellery", containerId: "products-container3" },
@@ -21,20 +19,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             { name: "Bracelets", containerId: "products-container10" },
             { name: "Bangles", containerId: "products-container11" }
         ];
-
         categories.forEach(({ name, containerId }) => {
-            const filtered = products.filter(p => p.category === name).slice(0, 4);
+            const filteredProducts = productData.filter(product => product.category === name).slice(0, 4);
             const container = document.getElementById(containerId);
 
             if (container) {
-                filtered.forEach(product => {
-                    const card = document.createElement("div");
-                    card.id = "products-card";
-                    card.dataset.sku = product.sku;
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement("div");
+                    productCard.id = "products-card";
+                    productCard.dataset.sku = product.sku;
 
-                    card.innerHTML = `
+                    productCard.innerHTML = `
                         <div id="products-img">
-                            <img src="${cloudinaryBase}${product.display_image}" alt="${product.title}" width="100">
+                            <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100">
                         </div>
                         <div id="products-dtls">
                             <h3 id="product-title">${product.title.slice(0, 50)}..</h3>
@@ -44,21 +41,23 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </div>
                     `;
 
-                    card.addEventListener("click", () => {
+                    productCard.addEventListener("click", () => {
                         localStorage.setItem("productDetailsId", JSON.stringify({ sku: product.sku }));
                         window.location.href = "/pages/product/productdetails.html";
                     });
 
-                    container.appendChild(card);
+                    container.appendChild(productCard);
                 });
             }
         });
     } catch (error) {
-        console.error("Error loading jewelry products:", error);
+        console.error("Error fetching products:", error);
     }
 
-    // ----------------- LOAD RANDOMIZED ADS -----------------
-    const slider = document.querySelector(".slider");
+    // ---------- AD BANNER LOAD ----------
+    const slider = document.querySelector(".slider"); // Changed from getElementById to querySelector
+    const apiUrl = "https://engine.cocomatik.com/api/pojos/adds/";
+    const cloudinaryBase = "https://res.cloudinary.com/cocomatik/";
 
     if (!slider) {
         console.warn("Ad slider container not found.");
@@ -66,24 +65,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        const res = await fetch(adApiUrl);
-        const adData = await res.json();
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log("Fetched ads:", data);
 
-        // Shuffle ads randomly
-        const shuffled = adData.sort(() => 0.5 - Math.random());
+        if (data.length === 0) {
+            slider.innerHTML = "<p>No ads available</p>";
+            return;
+        }
 
-        shuffled.forEach((item, index) => {
+        data.forEach((item, index) => {
             const img = document.createElement("img");
-            img.src = `${cloudinaryBase}${item.img}`;
+            img.src = cloudinaryBase + item.img;
             img.alt = `Ad ${index + 1}`;
-            img.style.height = "180px";
+            img.style.height = "180px"; // Optional: set height
             img.style.borderRadius = "10px";
             img.style.marginRight = "10px";
             slider.appendChild(img);
         });
-
-    } catch (err) {
-        console.error("Error loading ads:", err);
+    } catch (error) {
+        console.error("Error fetching ads:", error);
         slider.innerHTML = "<p>Failed to load ads.</p>";
     }
 });
