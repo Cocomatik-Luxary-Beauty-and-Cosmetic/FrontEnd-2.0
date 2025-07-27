@@ -1,12 +1,11 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const apiUrl = "https://engine.cocomatik.com/api/pocos/";
+    const productApiUrl = "https://engine.cocomatik.com/api/pocos/";
 
     try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+        const productResponse = await fetch(productApiUrl);
+        const productData = await productResponse.json();
 
-        // Categories and their respective container IDs
         const categories = [
             { name: "Skincare", containerId: "products-container" },
             { name: "Fragrances", containerId: "products-container2" },
@@ -17,14 +16,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         ];
 
         categories.forEach(({ name, containerId }) => {
-            const filteredProducts = data.filter(product => product.category === name).slice(0, 4);
+            const filteredProducts = productData.filter(product => product.category === name).slice(0, 4);
             const container = document.getElementById(containerId);
 
             if (container) {
                 filteredProducts.forEach(product => {
                     const productCard = document.createElement("div");
                     productCard.id = "products-card";
-                    productCard.dataset.sku = product.sku; // Store SKU in dataset
+                    productCard.dataset.sku = product.sku;
+
                     productCard.innerHTML = `
                         <div id="products-img">
                             <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100">
@@ -37,11 +37,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </div>
                     `;
 
-                    // Add click event to store SKU in local storage
                     productCard.addEventListener("click", () => {
                         localStorage.setItem("productDetailsId", JSON.stringify({ sku: product.sku }));
-                        console.log("Product ID stored:", product.sku);
-                        window.location.href=("/pages/product/productdetails.html")
+                        window.location.href = "/pages/product/productdetails.html";
                     });
 
                     container.appendChild(productCard);
@@ -50,5 +48,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     } catch (error) {
         console.error("Error fetching products:", error);
+    }
+
+    // ---------- AD BANNER LOAD ----------
+    const slider = document.querySelector(".slider"); // Changed from getElementById to querySelector
+    const apiUrl = "https://engine.cocomatik.com/api/pocos/adds/";
+    const cloudinaryBase = "https://res.cloudinary.com/cocomatik/";
+
+    if (!slider) {
+        console.warn("Ad slider container not found.");
+        return;
+    }
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log("Fetched ads:", data);
+
+        if (data.length === 0) {
+            slider.innerHTML = "<p>No ads available</p>";
+            return;
+        }
+
+        data.forEach((item, index) => {
+            const img = document.createElement("img");
+            img.src = cloudinaryBase + item.img;
+            img.alt = `Ad ${index + 1}`;
+            img.style.height = "180px"; // Optional: set height
+            img.style.borderRadius = "10px";
+            img.style.marginRight = "10px";
+            slider.appendChild(img);
+        });
+    } catch (error) {
+        console.error("Error fetching ads:", error);
+        slider.innerHTML = "<p>Failed to load ads.</p>";
     }
 });

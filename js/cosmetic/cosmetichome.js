@@ -36,4 +36,3 @@ Haircare.addEventListener("click", function () {
     window.location.href=("/pages/product/bestofproduct.html")
 });
 
-
