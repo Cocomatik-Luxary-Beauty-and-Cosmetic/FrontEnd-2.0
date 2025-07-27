@@ -62,7 +62,7 @@
     background-image: url(/assets/index/jewelry-brand-img\ .jpg);
 }
 #CosmeticsIMG{
-    background-image: url(/assets/index/cosmetics-img.jpg);
+    background-image: url(https://res.cloudinary.com/cocomatik/image/upload/v1753640324/cosmetics-img_nfnciy.jpg);
 }
 
 .brand-type-box:hover {
