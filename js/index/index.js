@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        // console.log(data)
+        console.log(data)
 
         data.forEach(product => {
             const title = product.title || "No Title Available";
