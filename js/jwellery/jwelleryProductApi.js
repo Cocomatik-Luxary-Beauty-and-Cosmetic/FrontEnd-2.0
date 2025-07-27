@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error fetching products:", error);
     }
 
-    // ----- AD SLIDER -----
+    // ----- RANDOMIZED AD SLIDER -----
     const slider = document.querySelector(".slider");
     const adsApi = "https://engine.cocomatik.com/api/pojos/adds/";
     const cloudinaryBase = "https://res.cloudinary.com/cocomatik/";
@@ -66,13 +66,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const response = await fetch(adsApi);
-        const ads = await response.json();
+        let ads = await response.json();
 
         if (ads.length === 0) {
             slider.innerHTML = "<p>No ads available</p>";
             return;
         }
-        console.log(ads)
+
+        // Shuffle ads randomly
+        ads = ads.sort(() => 0.5 - Math.random());
 
         ads.forEach((item, index) => {
             const img = document.createElement("img");
