@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    // ----- PRODUCT CARDS -----
-    const productsApi = "https://engine.cocomatik.com/api/pojos/";
+    const jewelryApiUrl = "https://engine.cocomatik.com/api/home/products/all/";
+    const adApiUrl = "https://engine.cocomatik.com/api/pocos/adds/";
+    const cloudinaryBase = "https://res.cloudinary.com/cocomatik/";
+
+    // ----------------- LOAD JEWELLERY PRODUCTS -----------------
     try {
-        const response = await fetch(productsApi);
-        const data = await response.json();
+        const response = await fetch(jewelryApiUrl);
+        const products = await response.json();
 
         const categories = [
             { name: "Wedding Jewellery", containerId: "products-container" },
@@ -20,18 +23,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         ];
 
         categories.forEach(({ name, containerId }) => {
-            const filteredProducts = data.filter(product => product.category === name).slice(0, 4);
+            const filtered = products.filter(p => p.category === name).slice(0, 4);
             const container = document.getElementById(containerId);
 
-            if (container && filteredProducts.length > 0) {
-                filteredProducts.forEach(product => {
-                    const productCard = document.createElement("div");
-                    productCard.id = "products-card";
-                    productCard.dataset.sku = product.sku;
+            if (container) {
+                filtered.forEach(product => {
+                    const card = document.createElement("div");
+                    card.id = "products-card";
+                    card.dataset.sku = product.sku;
 
-                    productCard.innerHTML = `
+                    card.innerHTML = `
                         <div id="products-img">
-                            <img src="https://res.cloudinary.com/cocomatik/${product.display_image}" alt="${product.title}" width="100">
+                            <img src="${cloudinaryBase}${product.display_image}" alt="${product.title}" width="100">
                         </div>
                         <div id="products-dtls">
                             <h3 id="product-title">${product.title.slice(0, 50)}..</h3>
@@ -41,23 +44,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </div>
                     `;
 
-                    productCard.addEventListener("click", () => {
+                    card.addEventListener("click", () => {
                         localStorage.setItem("productDetailsId", JSON.stringify({ sku: product.sku }));
                         window.location.href = "/pages/product/productdetails.html";
                     });
 
-                    container.appendChild(productCard);
+                    container.appendChild(card);
                 });
             }
         });
     } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error loading jewelry products:", error);
     }
 
-    // ----- RANDOMIZED AD SLIDER -----
+    // ----------------- LOAD RANDOMIZED ADS -----------------
     const slider = document.querySelector(".slider");
-    const adsApi = "https://engine.cocomatik.com/api/pojos/adds/";
-    const cloudinaryBase = "https://res.cloudinary.com/cocomatik/";
 
     if (!slider) {
         console.warn("Ad slider container not found.");
@@ -65,28 +66,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        const response = await fetch(adsApi);
-        let ads = await response.json();
-
-        if (ads.length === 0) {
-            slider.innerHTML = "<p>No ads available</p>";
-            return;
-        }
+        const res = await fetch(adApiUrl);
+        const adData = await res.json();
 
         // Shuffle ads randomly
-        ads = ads.sort(() => 0.5 - Math.random());
+        const shuffled = adData.sort(() => 0.5 - Math.random());
 
-        ads.forEach((item, index) => {
+        shuffled.forEach((item, index) => {
             const img = document.createElement("img");
-            img.src = cloudinaryBase + item.img;
+            img.src = `${cloudinaryBase}${item.img}`;
             img.alt = `Ad ${index + 1}`;
             img.style.height = "180px";
             img.style.borderRadius = "10px";
             img.style.marginRight = "10px";
             slider.appendChild(img);
         });
-    } catch (error) {
-        console.error("Error fetching ads:", error);
+
+    } catch (err) {
+        console.error("Error loading ads:", err);
         slider.innerHTML = "<p>Failed to load ads.</p>";
     }
 });
