@@ -78,7 +78,7 @@ const categories = [
             const img = document.createElement("img");
             img.src = cloudinaryBase + item.img;
             img.alt = `Ad ${index + 1}`;
-            img.style.height = "180px"; // Optional: set height
+            img.style.height = "100%"; // Optional: set height
             img.style.borderRadius = "10px";
             img.style.marginRight = "10px";
             slider.appendChild(img);
